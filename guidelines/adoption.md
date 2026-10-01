@@ -38,7 +38,7 @@ ToDoList carry the AnixOps brand, and the product names in
 | **AnixOps SSH** (EasySSH, AnixOps-ssh: merging) | egui; Tauri + React | Two names ("EasySSH", "AnixOps SSH Manager"); `#5665E6`/`#7E89FF`; Tauri default icon | One name, AnixOps SSH, in both until merged; `anixops_tokens.rs` (egui) or `tokens.css` (Tauri); `tauri/` icons |
 | **AnixOps NetworkCore** (NetworkCore) | Tauri + React | Green accent `#A8E8C4` and grid icon; README `networkcore_AnixOps` | Indigo accent, AnixOps mark and `tauri/` icons; green may stay only as a chart colour |
 | **AnixOps ToDo** (ToDoList) | Vue 3 + Element Plus | Unbranded | `element-plus.css`, mark, rename |
-| Website (AnixOps-website) | Vue 3 + Element Plus | Gradient `#00D4FF→#6366F1`; "AnixOps Studio" presented like a product; `/favicon.svg` missing | Gradient `#38BDF8→#6366F1`, `element-plus.css`, favicon set, OG image; AnixOps Studio as the maker ([naming](naming.md#the-studio-anixops-studio)) |
+| Website (AnixOps-website) | Vue 3 + Element Plus | Gradient `#00D4FF→#6366F1`; "AnixOps Studio" presented like a product; `/favicon.svg` missing | Gradient `#0EA5E9→#6366F1`, `element-plus.css`, favicon set, OG image; AnixOps Studio as the maker ([naming](naming.md#the-studio-anixops-studio)) |
 | node-platform | Next 15 + Tailwind + shadcn | "A" monogram favicon; primary `#0A6DE6` | Hexagon mark favicons, Tailwind v4 theme + shadcn mapping |
 | Blog | Hono SSR | Primary `#3B82F6` | `tokens.css`, favicon set, OG image |
 | Prompt-To-Website | Vue 3, hand-written CSS | Primary `#0071E3` | `tokens.css` |

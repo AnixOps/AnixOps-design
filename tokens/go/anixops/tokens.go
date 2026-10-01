@@ -3,7 +3,7 @@
 package anixops
 
 // Version is the AnixOps Design version these tokens come from.
-const Version = "1.0.1"
+const Version = "1.0.2"
 
 // UI colours. Values are CSS colour strings (#RRGGBB or rgba()).
 var (
@@ -50,7 +50,7 @@ var (
 
 // Brand colours (theme independent).
 const (
-	BrandGradientStart = "#38BDF8"
+	BrandGradientStart = "#0EA5E9"
 	BrandGradientEnd   = "#6366F1"
 	BrandPurple        = "#8B5CF6"
 	BrandAmber         = "#F59E0B"
@@ -65,7 +65,7 @@ var (
 	TermWarning    = TermColor{Light: "#B25000", Dark: "#FF9F0A", ANSI256Light: 130, ANSI256Dark: 214, ANSI16: 3}
 	TermDanger     = TermColor{Light: "#D70015", Dark: "#FF453A", ANSI256Light: 160, ANSI256Dark: 203, ANSI16: 1}
 	TermMuted      = TermColor{Light: "#6E6E73", Dark: "#8E8E93", ANSI256Light: 242, ANSI256Dark: 246, ANSI16: 8}
-	TermBrandStart = TermColor{Light: "#38BDF8", Dark: "#38BDF8", ANSI256Light: 75, ANSI256Dark: 75, ANSI16: 6}
+	TermBrandStart = TermColor{Light: "#0EA5E9", Dark: "#0EA5E9", ANSI256Light: 38, ANSI256Dark: 38, ANSI16: 6}
 	TermBrandEnd   = TermColor{Light: "#6366F1", Dark: "#6366F1", ANSI256Light: 63, ANSI256Dark: 63, ANSI16: 5}
 )
 

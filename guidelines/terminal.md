@@ -19,7 +19,7 @@ remaps.
 | warning | `#B25000` | `#FF9F0A` | 130 | 214 | 3 yellow | Degraded, deprecated flags |
 | danger | `#D70015` | `#FF453A` | 160 | 203 | 1 red | Errors, failed checks, destructive prompts |
 | muted | `#6E6E73` | `#8E8E93` | 242 | 246 | 8 bright black | Hints, timestamps, secondary columns |
-| brand-start | `#38BDF8` | `#38BDF8` | 75 | 75 | 6 cyan | Banner gradient only |
+| brand-start | `#0EA5E9` | `#0EA5E9` | 38 | 38 | 6 cyan | Banner gradient only |
 | brand-end | `#6366F1` | `#6366F1` | 63 | 63 | 5 magenta | Banner gradient only |
 
 Every text role, truecolor and 256 fallback alike, is at least 4.5:1 on white

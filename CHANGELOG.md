@@ -3,6 +3,19 @@
 All notable changes to AnixOps Design. Versions follow
 [Semantic Versioning](https://semver.org/) on token names and asset paths.
 
+## 1.0.2 - 2026-10-01
+
+### Changed
+
+- Mark: the hub circle grows from radius 2.25 to 2.75 (the favicon already
+  used 2.75). At 2.25 the arcs left between the spokes were thin slivers that
+  showed as notches in large renders; the hub now reads as a clear node.
+- Brand gradient start deepened from `#38BDF8` to `#0EA5E9`
+  (`--brand-gradient-start`, terminal `brand-start`, xterm-256 75 → 38). The
+  white glyph is now at least 3.36:1 wherever it sits on the tile (was
+  2.78:1 at its top-left vertex); `scripts/contrast.py --check` enforces 3:1.
+- Every brand asset regenerated.
+
 ## 1.0.1 - 2026-10-01
 
 ### Changed

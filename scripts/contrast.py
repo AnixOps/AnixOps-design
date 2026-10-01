@@ -69,6 +69,21 @@ PAIRS += [
 ]
 
 
+def gradient_at(t):
+    """Brand gradient colour at position t (0 = start, 1 = end)."""
+    a, b = TOKENS["brand"]["gradient-start"]["$value"], TOKENS["brand"]["gradient-end"]["$value"]
+    ca = [int(a[i:i + 2], 16) for i in (1, 3, 5)]
+    cb = [int(b[i:i + 2], 16) for i in (1, 3, 5)]
+    return "#" + "".join(f"{round(ca[i] * (1 - t) + cb[i] * t):02X}" for i in range(3))
+
+
+# The white glyph on the tile must stay at 3:1 (UI graphics) wherever it sits. The gradient
+# runs at 135 degrees, so t = (x + y) / 2 in tile units; the glyph box is 56.25 % of the tile,
+# centred, and its lightest point is the ring's top-left vertex (3.5, 7.25) on the 24 grid.
+GLYPH_T = (0.21875 + 3.5 / 24 * 0.5625 + 0.21875 + 7.25 / 24 * 0.5625) / 2
+PAIRS.append(("light", "#FFFFFF", gradient_at(GLYPH_T), 3.0))
+
+
 def xterm256(index):
     """Hex value of an xterm-256 colour in the 6x6x6 cube (16-231) or grey ramp (232-255)."""
     if index >= 232:

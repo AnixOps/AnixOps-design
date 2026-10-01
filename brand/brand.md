@@ -35,7 +35,7 @@ with round joins and caps; nothing is traced.
 | Spine | (12, 6) to (12, 18). Stroke 1.75 |
 | Arms | (6.5, 9.25) to (12, 12) to (17.5, 9.25): parallel to the upper hexagon edges. Stroke 1.75 |
 | Floor | (6.5, 15.25) to (12, 18) to (17.5, 15.25): parallel to the lower edges. Stroke 1.75 |
-| Hub | Circle at (12, 12), radius 2.25 |
+| Hub | Circle at (12, 12), radius 2.75 (1.0.0: 2.25, enlarged in 1.0.2 so it reads as a node and the arcs between spokes stay smooth) |
 
 The spokes stop 1.75 units short of the ring so the glyph stays open at small
 sizes. The outer extent is 19.5 × 20.5 units.
@@ -108,11 +108,13 @@ computed with `scripts/contrast.py`, never estimated.
 
 ### 3.1 Brand gradient
 
-`#38BDF8 → #6366F1` at 135°. **Brand moments only**: the logo tile, the login
+`#0EA5E9 → #6366F1` at 135°. **Brand moments only**: the logo tile, the login
 page backdrop, the hero numbers on the user home page, marketing headers.
-**Never** for controls, links, body text or status. White on `#38BDF8` is
-2.14:1 and white on `#6366F1` 4.47:1, so text on the gradient fails WCAG; the
-mark itself is exempt as a logo.
+**Never** for controls, links, body text or status. White on `#0EA5E9` is
+2.77:1 and white on `#6366F1` 4.47:1, so text on the gradient fails WCAG. The
+mark is exempt as a logo, but the white glyph is still kept at **3:1 or more
+wherever it sits on the gradient** (3.36:1 at its top-left vertex), so it
+stays solid at small sizes; `scripts/contrast.py --check` enforces this.
 
 ### 3.2 Accent
 
@@ -227,7 +229,8 @@ All numbers use `font-variant-numeric: tabular-nums`. Details:
 
 ## 6. Decisions (owner, 2026-10-01)
 
-1. Palette approved as specified here: brand gradient `#38BDF8 → #6366F1`,
+1. Palette approved as specified here: brand gradient `#0EA5E9 → #6366F1`
+   (start deepened from `#38BDF8` in 1.0.2),
    accent `#4F5BE8` / `#818CF8` with dark fill `#5B63E6`, light success
    `#1A7F37`, pure black dark background.
 2. anix-control's `#0064FA` migrates to the accent.

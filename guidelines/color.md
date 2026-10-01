@@ -107,15 +107,16 @@ Targets: 4.5:1 for text, 3:1 for large text, UI boundaries and chart marks.
 | light | `#FFFFFF` | accent `#4F5BE8` | 5.26:1 | 4.5:1 | pass |
 | dark | `#FFFFFF` | accent `#818CF8` | 2.98:1 | — | info only |
 | dark | `#000000` | accent `#818CF8` | 7.04:1 | — | info only |
-| light | brand.gradient-start `#38BDF8` | `#FFFFFF` | 2.14:1 | — | info only |
+| light | brand.gradient-start `#0EA5E9` | `#FFFFFF` | 2.77:1 | — | info only |
 | light | brand.gradient-end `#6366F1` | `#FFFFFF` | 4.47:1 | — | info only |
-| light | `#FFFFFF` | brand.gradient-start `#38BDF8` | 2.14:1 | — | info only |
+| light | `#FFFFFF` | brand.gradient-start `#0EA5E9` | 2.77:1 | — | info only |
 | light | `#FFFFFF` | brand.gradient-end `#6366F1` | 4.47:1 | — | info only |
 | light | brand.purple `#8B5CF6` | `#FFFFFF` | 4.23:1 | 3.0:1 | pass |
 | light | brand.amber `#F59E0B` | `#FFFFFF` | 2.15:1 | — | info only |
 | dark | brand.purple `#8B5CF6` | `#000000` | 4.96:1 | 3.0:1 | pass |
 | dark | brand.amber `#F59E0B` | `#000000` | 9.78:1 | 3.0:1 | pass |
 | light | `#1E8E3E` | `#FFFFFF` | 4.21:1 | — | info only |
+| light | `#FFFFFF` | `#2B8FEC` | 3.36:1 | 3.0:1 | pass |
 
 ### Terminal
 
@@ -155,12 +156,12 @@ nearest one to its truecolor value.
 | muted | dark truecolor | `#8E8E93` | `#1C1C1E` | 5.22:1 | 4.5:1 | pass |
 | muted | dark 256 (246) | `#949494` | `#000000` | 6.92:1 | 4.5:1 | pass |
 | muted | dark 256 (246) | `#949494` | `#1C1C1E` | 5.61:1 | 4.5:1 | pass |
-| brand-start | light truecolor | `#38BDF8` | `#FFFFFF` | 2.14:1 | — | info only |
-| brand-start | light 256 (75) | `#5FAFFF` | `#FFFFFF` | 2.32:1 | — | info only |
-| brand-start | dark truecolor | `#38BDF8` | `#000000` | 9.80:1 | — | info only |
-| brand-start | dark truecolor | `#38BDF8` | `#1C1C1E` | 7.94:1 | — | info only |
-| brand-start | dark 256 (75) | `#5FAFFF` | `#000000` | 9.06:1 | — | info only |
-| brand-start | dark 256 (75) | `#5FAFFF` | `#1C1C1E` | 7.34:1 | — | info only |
+| brand-start | light truecolor | `#0EA5E9` | `#FFFFFF` | 2.77:1 | — | info only |
+| brand-start | light 256 (38) | `#00AFD7` | `#FFFFFF` | 2.59:1 | — | info only |
+| brand-start | dark truecolor | `#0EA5E9` | `#000000` | 7.58:1 | — | info only |
+| brand-start | dark truecolor | `#0EA5E9` | `#1C1C1E` | 6.14:1 | — | info only |
+| brand-start | dark 256 (38) | `#00AFD7` | `#000000` | 8.11:1 | — | info only |
+| brand-start | dark 256 (38) | `#00AFD7` | `#1C1C1E` | 6.57:1 | — | info only |
 | brand-end | light truecolor | `#6366F1` | `#FFFFFF` | 4.47:1 | — | info only |
 | brand-end | light 256 (63) | `#5F5FFF` | `#FFFFFF` | 4.60:1 | — | info only |
 | brand-end | dark truecolor | `#6366F1` | `#000000` | 4.70:1 | — | info only |
@@ -174,7 +175,7 @@ nearest one to its truecolor value.
 |---|---|---|
 | `--label-3` on light backgrounds | 3.33–3.62:1 | Non-essential text ≥ 14 px only (placeholders, secondary timestamps) |
 | Chart colours, `--accent-fill` as a boundary | 3.26–5.26:1 vs 3:1 target | Graphics and control boundaries, not text |
-| White on `#38BDF8` / `#6366F1` | 2.14 / 4.47:1 | The logo only (logotypes are exempt) |
+| White on `#0EA5E9` / `#6366F1` | 2.77 / 4.47:1 | The logo only (logotypes are exempt); the glyph itself is checked at ≥ 3:1 where it sits (last row of the table above) |
 | White on dark `#818CF8` | 2.98:1 | Not used: dark filled buttons use `--accent-fill` `#5B63E6` |
 | Amber `#F59E0B` on white | 2.15:1 | Illustrations in dark contexts only |
 | `#1E8E3E` on white | 4.21:1 | Not used: replaced by `#1A7F37` |

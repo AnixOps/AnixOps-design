@@ -32,7 +32,7 @@ const INTER = { 400: font(400), 600: font(600), 700: font(700) };
 // The mark on its 24-unit grid (see brand/brand.md, 2.1). The favicon variant drops the
 // floor chevron and thickens strokes so every line stays one device pixel wide at 16 px.
 const GLYPH = {
-  full: { ring: 2.5, spokes: 1.75, hub: 2.25, spokePath: "M12 6v12M6.5 9.25 12 12l5.5-2.75M6.5 15.25 12 18l5.5-2.75" },
+  full: { ring: 2.5, spokes: 1.75, hub: 2.75, spokePath: "M12 6v12M6.5 9.25 12 12l5.5-2.75M6.5 15.25 12 18l5.5-2.75" },
   small: { ring: 3, spokes: 2.5, hub: 2.75, spokePath: "M12 7v5M7 9.5 12 12l5-2.5M12 12v6" },
 };
 const RING = "M12 3 20.5 7.25v9.5L12 21l-8.5-4.25v-9.5z";
