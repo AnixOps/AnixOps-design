@@ -12,10 +12,10 @@ regenerate.
 | Tailwind CSS v3 | control-center web, node-platform | `tokens/tailwind/preset.cjs` |
 | Tailwind CSS v4 | new projects | `tokens/tailwind/theme.css` |
 | Element Plus | website, ToDoList | `tokens/element-plus/element-plus.css` |
-| React + shadcn/ui | node-platform, NetworkCore, AnixOps-ssh (Tauri) | `tokens.css` + the mapping below |
+| React + shadcn/ui | node-platform, NetworkCore, AnixOps SSH (Tauri, AnixOps-ssh) | `tokens.css` + the mapping below |
 | Flutter (Material 3) | control-center mobile | `tokens/flutter/anixops_tokens.dart` |
 | Go (lipgloss, bubbletea, cobra) | control-center TUI, anix-agent | `tokens/go/anixops` module, see [terminal](terminal.md) |
-| Rust (egui, ratatui) | EasySSH | `tokens/rust/anixops_tokens.rs` |
+| Rust (egui, ratatui) | AnixOps SSH (egui, EasySSH) | `tokens/rust/anixops_tokens.rs` |
 
 ## Web: CSS
 

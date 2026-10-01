@@ -232,7 +232,8 @@ All numbers use `font-variant-numeric: tabular-nums`. Details:
    `#1A7F37`, pure black dark background.
 2. anix-control's `#0064FA` migrates to the accent.
 3. One accent for all products; no sub-brand accents.
-4. EasySSH and ToDoList carry the brand; product names as in
+4. EasySSH and ToDoList carry the brand (EasySSH and AnixOps-ssh merge into
+   AnixOps SSH); AnixOps Studio is the maker, not a product; names as in
    [`../guidelines/naming.md`](../guidelines/naming.md).
 5. 1.0.0 includes the terminal palette, the naming guide, platform exports
    and the full icon set.

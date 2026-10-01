@@ -35,11 +35,10 @@ ToDoList carry the AnixOps brand, and the product names in
 | **AnixOps Control Center** mobile (control-center/mobile) | Flutter M3 | Primary `#3B82F6`; placeholder `app_icon.png`, `logo.png` and Inter TTFs; web title `anixops_mobile` | `anixops_tokens.dart`, `app-icon/` via flutter_launcher_icons, Inter TTFs, web title |
 | **AnixOps Control Center** TUI (control-center) | bubbletea + lipgloss | 256-colour 62/57/86/241 | Go module `TermAccent`/`TermSuccess`/`TermMuted`, `ColorEnabled`, `Banner` |
 | **AnixOps Agent** (anix-agent) | cobra CLI | No colour policy or banner | Go module; `--color`, `NO_COLOR`, `--version` banner ([terminal](terminal.md)) |
-| **AnixOps SSH** (EasySSH) | egui | Name "EasySSH"; `#5665E6`/`#7E89FF` | `anixops_tokens.rs`; rename; icon set |
-| AnixOps-ssh | Tauri + React | Name "AnixOps SSH Manager"; Tauri default icon | `tokens.css` (+ shadcn mapping if used), `tauri/` icons; name per [naming](naming.md) |
+| **AnixOps SSH** (EasySSH, AnixOps-ssh: merging) | egui; Tauri + React | Two names ("EasySSH", "AnixOps SSH Manager"); `#5665E6`/`#7E89FF`; Tauri default icon | One name, AnixOps SSH, in both until merged; `anixops_tokens.rs` (egui) or `tokens.css` (Tauri); `tauri/` icons |
 | **AnixOps NetworkCore** (NetworkCore) | Tauri + React | Green accent `#A8E8C4` and grid icon; README `networkcore_AnixOps` | Indigo accent, AnixOps mark and `tauri/` icons; green may stay only as a chart colour |
 | **AnixOps ToDo** (ToDoList) | Vue 3 + Element Plus | Unbranded | `element-plus.css`, mark, rename |
-| Website (AnixOps-website) | Vue 3 + Element Plus | Gradient `#00D4FF→#6366F1`; "AnixOps Studio"; `/favicon.svg` missing | Gradient `#38BDF8→#6366F1`, `element-plus.css`, favicon set, OG image |
+| Website (AnixOps-website) | Vue 3 + Element Plus | Gradient `#00D4FF→#6366F1`; "AnixOps Studio" presented like a product; `/favicon.svg` missing | Gradient `#38BDF8→#6366F1`, `element-plus.css`, favicon set, OG image; AnixOps Studio as the maker ([naming](naming.md#the-studio-anixops-studio)) |
 | node-platform | Next 15 + Tailwind + shadcn | "A" monogram favicon; primary `#0A6DE6` | Hexagon mark favicons, Tailwind v4 theme + shadcn mapping |
 | Blog | Hono SSR | Primary `#3B82F6` | `tokens.css`, favicon set, OG image |
 | Prompt-To-Website | Vue 3, hand-written CSS | Primary `#0071E3` | `tokens.css` |

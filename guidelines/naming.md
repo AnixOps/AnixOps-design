@@ -12,15 +12,15 @@
 
 ## Products
 
-Every product is **"AnixOps <Product>"**. "AnixOps" alone means the brand or
-the company, never one product.
+Every product is **"AnixOps <Product>"**. "AnixOps" alone means the brand,
+never one product.
 
 | Product | Canonical name | Short form (after first mention, inside the product) | Identifier |
 |---|---|---|---|
 | Admin panel (anix-control) | **AnixOps Control** | Control | `anix-control` |
 | Web, mobile and TUI client (control-center) | **AnixOps Control Center** | Control Center | `anixops-control-center` |
 | Node agent (anix-agent) | **AnixOps Agent** | Agent | `anixops-agent` |
-| SSH client (EasySSH) | **AnixOps SSH** | SSH | `anixops-ssh` |
+| SSH client (EasySSH and AnixOps-ssh, merging) | **AnixOps SSH** | SSH | `anixops-ssh` |
 | To-do app (ToDoList) | **AnixOps ToDo** | ToDo | `anixops-todo` |
 | Network tool (NetworkCore) | **AnixOps NetworkCore** | NetworkCore | `anixops-networkcore` |
 
@@ -32,6 +32,25 @@ keep their names; their READMEs, window titles, store listings and
 Products not in this table follow the same pattern when they first get a
 user-facing name; add them here in the same change.
 
+## The studio: AnixOps Studio
+
+**AnixOps Studio** is the one-person studio that makes AnixOps products. It is
+the maker, not a product: never put it in the product table or name an app
+"AnixOps Studio".
+
+- Use it where the maker is named: store publisher and developer name, About
+  dialogs (「AnixOps Studio 出品」 / "Made by AnixOps Studio"), website footer,
+  press and contact pages.
+- **It is not a legal entity yet.** Until one is registered, legal text
+  (copyright lines, licenses, privacy policies, store legal fields) names the
+  owner as a person; "AnixOps Studio" may follow as a trading name, never as
+  the rights holder on its own.
+- If a business is registered later (for example a Chinese 个体工商户), its
+  registered name goes in legal text only, exactly as on the licence. Chinese
+  registered names are written in Chinese characters, so the registered name
+  and the brand can differ; the brand stays "AnixOps" and the studio "AnixOps
+  Studio" in all product and marketing copy.
+
 ## Fixes found in the 2026-10 audit
 
 | Where | Today | Use |
@@ -39,9 +58,9 @@ user-facing name; add them here in the same change.
 | Flutter web `<title>` | `anixops_mobile` | AnixOps Control Center |
 | NetworkCore README title | `networkcore_AnixOps` | AnixOps NetworkCore |
 | EasySSH window and README | EasySSH | AnixOps SSH |
-| AnixOps-ssh app | AnixOps SSH Manager | AnixOps SSH (if it is a separate product from EasySSH, give it a distinct "AnixOps <Product>" name) |
+| AnixOps-ssh app | AnixOps SSH Manager | AnixOps SSH (the two merge into one product) |
 | ToDoList | ToDoList | AnixOps ToDo |
-| Website | "AnixOps Studio" | A canonical product name from the table, or remove |
+| Website | "AnixOps Studio" used like a product | The studio name, used as maker only (see above) |
 | Archived repos `Anixops-control-center(-worker)` | Anixops | Archived; leave as is |
 
 ## Writing product names
