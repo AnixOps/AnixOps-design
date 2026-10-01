@@ -1,0 +1,214 @@
+# AnixOps Brand
+
+> **DRAFT — pending owner approval.** Version 1.0.0-draft, 2026-10-01. The
+> palette (especially the accent) is a proposal. Products may use the draft
+> values through tokens only, so the final values can be swapped in one place.
+
+## 1. Purpose
+
+One recognisable identity for every AnixOps product: the Control panel, the
+Control Center web and mobile apps, the agents and CLIs, and the sites. This
+document defines the mark, its versions, the colours, the type and the rules.
+The tokens in [`../tokens/tokens.json`](../tokens/tokens.json) are the
+machine-readable version of the colour, type and layout sections; when this
+document and the tokens disagree, fix whichever is wrong in the same change.
+
+The family is **AnixOps** (capital A, capital O). Products are named
+"AnixOps <Product>": **AnixOps Control**, **AnixOps Control Center**,
+**AnixOps Agent**. Never "Anixops", "ANIXOPS" or "Anix Ops" in prose;
+lowercase `anixops` only in identifiers, package names and domains.
+
+## 2. The mark
+
+The mark is a hexagon (a cube seen corner-on) enclosing a hub with spokes: a
+control point that reaches every node. It is redrawn from the de-facto brand,
+the Control Center app icon, as clean geometry.
+
+### 2.1 Construction
+
+Drawn on a **24 × 24 unit grid**, centred on (12, 12). All edges are strokes
+with round joins and caps; nothing is traced.
+
+| Element | Geometry |
+|---|---|
+| Hexagon ring | Centre-line vertices (12, 3), (20.5, 7.25), (20.5, 16.75), (12, 21), (3.5, 16.75), (3.5, 7.25). Slanted edges rise 1 unit per 2 across (slope 1:2), as in the app icon. Stroke 2.5 |
+| Spine | (12, 6) to (12, 18). Stroke 1.75 |
+| Arms | (6.5, 9.25) to (12, 12) to (17.5, 9.25): parallel to the upper hexagon edges. Stroke 1.75 |
+| Floor | (6.5, 15.25) to (12, 18) to (17.5, 15.25): parallel to the lower edges. Stroke 1.75 |
+| Hub | Circle at (12, 12), radius 2.25 |
+
+The spokes stop 1.75 units short of the ring so the glyph stays open at small
+sizes. The outer extent is 19.5 × 20.5 units.
+
+**Tile** (`mark.svg`): a 64-unit rounded square, corner radius 14 (22 % of the
+side, matching the app icon), filled with the brand gradient at 135°. The
+glyph is scaled 1.5× and centred (offset 14), so it fills about 46 % of the
+tile.
+
+**Favicon** (`favicon.svg`): a 32-unit tile, radius 7. The floor chevron is dropped, the ring is 3 units and the spokes 2.5 units,
+so every stroke stays at least one device pixel wide at 16 px.
+
+### 2.2 Clear space and minimum size
+
+- **Clear space**: one quarter of the tile side on every side (16 units for the
+  64-unit tile). For the bare glyph, a quarter of the glyph height. No text,
+  edge or other mark inside it.
+- **Minimum size**: 16 px digital (use `favicon.svg` below 24 px), 6 mm print.
+  The wordmark lockup: 20 px tile height minimum.
+
+### 2.3 Versions
+
+| File | Use it for |
+|---|---|
+| [`assets/mark.svg`](assets/mark.svg) | Default. App icons, login page, about dialogs, social avatars, README headers |
+| [`assets/mark-mono-white.svg`](assets/mark-mono-white.svg) | Glyph on dark or photographic backgrounds, on the brand gradient, on dark slate |
+| [`assets/mark-mono-black.svg`](assets/mark-mono-black.svg) | Glyph on light backgrounds where colour is unavailable: print, fax, engraving, one-colour merch |
+| [`assets/mark-glyph.svg`](assets/mark-glyph.svg) | `fill`/`stroke` = `currentColor`. Inline in UI next to text (navigation bar, sidebar header), so it follows `--label-1` in both themes |
+| [`assets/favicon.svg`](assets/favicon.svg) | Browser tab, bookmarks, PWA icon source (also export 180, 192 and 512 px PNGs from it) |
+| [`assets/wordmark.svg`](assets/wordmark.svg) | Lockup: tile + "AnixOps Control" |
+
+### 2.4 Wordmark and lockup
+
+The lockup is the tile followed by the product name: "AnixOps" in **Inter
+SemiBold (600)** and the product word in **Inter Regular (400)**, label-1 and
+label-2 colours, tracking −1 %, cap height about half the tile height; the
+gap between tile and text is one third of the tile height.
+
+`wordmark.svg` uses live SVG `<text>` with the font stack
+`Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`,
+so it renders slightly differently where Inter is missing. **Before 1.0.0 is
+tagged, the production wordmark must be exported with the text converted to
+outlines** (Inter is under the SIL Open Font License, which allows this). In
+HTML, build the lockup from the inline glyph plus a styled text node instead
+of an image, so it follows the theme:
+
+```html
+<a class="brand" href="/"><svg aria-hidden="true">…mark-glyph…</svg>
+  <span><b>AnixOps</b> Control</span></a>
+```
+
+In dark mode the lockup text uses `--label-1` / `--label-2` (light text); the
+tile keeps its gradient.
+
+## 3. Colour
+
+Full contrast table: [`../guidelines/color.md`](../guidelines/color.md),
+computed with `scripts/contrast.py`, never estimated.
+
+### 3.1 Brand gradient
+
+`#38BDF8 → #6366F1` at 135°. **Brand moments only**: the logo tile, the login
+page backdrop, the hero numbers on the user home page, marketing headers.
+**Never** for controls, links, body text or status. White on `#38BDF8` is
+2.14:1 and white on `#6366F1` 4.47:1, so text on the gradient fails WCAG; the
+mark itself is exempt as a logo.
+
+### 3.2 Accent (draft)
+
+| Token | Light | Dark | Notes |
+|---|---|---|---|
+| `--accent` | `#4F5BE8` | `#818CF8` | Links, selection, focus ring, icons. 5.26:1 on white; 7.04:1 on black, 5.70:1 on `#1C1C1E` |
+| `--accent-hover` | `#4350DD` | `#949EFA` | |
+| `--accent-fill` | `#4F5BE8` | `#5B63E6` | Primary button background. White text 5.26:1 / 4.80:1. Dark needs a deeper fill because white on `#818CF8` is only 2.98:1 |
+| `--accent-fill-hover` | `#4350DD` | `#5058DC` | |
+| `--accent-soft` | `rgba(79,91,232,.10)` | `rgba(129,140,248,.18)` | Selected rows, chips |
+
+One accent per screen. It is derived from the gradient's indigo end, darkened
+until it passes AA as text.
+
+### 3.3 Neutrals
+
+| Token | Light | Dark |
+|---|---|---|
+| `--bg` | `#FBFBFD` | `#000000` (decided) |
+| `--bg-elevated` | `#FFFFFF` | `#1C1C1E` |
+| `--bg-grouped` | `#F5F5F7` | `#111113` |
+| `--label-1` | `#1D1D1F` | `#F5F5F7` |
+| `--label-2` | `#6E6E73` | `#A1A1A6` |
+| `--label-3` | `#86868B` | `#8E8E93` |
+| `--separator` | `rgba(60,60,67,.12)` | `rgba(84,84,88,.48)` |
+
+`--label-3` is 3.33–3.62:1 in light mode: use it only for non-essential text
+of 14 px and up (placeholders, timestamps next to a label that carries the
+meaning).
+
+### 3.4 Status and supporting colours
+
+| Token | Light | Dark |
+|---|---|---|
+| `--success` | `#1A7F37` | `#30D158` |
+| `--warning` | `#B25000` | `#FF9F0A` |
+| `--danger` | `#D70015` | `#FF453A` |
+| `--danger-fill` | `#D70015` | `#E0242F` |
+| Purple (supporting) | `#8B5CF6` | `#8B5CF6` |
+| Amber (supporting) | `#F59E0B` | `#F59E0B` |
+
+The planned light success `#1E8E3E` is **4.21:1 on white** and fails AA for
+text; the draft corrects it to `#1A7F37` (5.08:1). Purple and amber come from
+the mobile app; they are for charts, illustrations and badges' icon fills,
+not text (amber is 2.15:1 on white).
+
+### 3.5 Summary of contrast
+
+Every text pair in both themes passes 4.5:1, except `--label-3` (3.33–3.62:1
+in light, allowed only for non-essential text ≥ 14 px). Below-target pairs
+appear only as "info only" rows: brand gradient end points with white (logo
+use only), white on dark `#818CF8` (not used; dark buttons use `--accent-fill`)
+and amber on white (graphics only).
+
+## 4. Typography
+
+- **Latin**: the system stack first (`-apple-system, BlinkMacSystemFont`
+  renders the platform font on Apple devices), then **self-hosted Inter**
+  (variable, Latin subset, `font-display: swap`) for every other platform.
+- **Chinese**: system fonts only — PingFang SC, Hiragino Sans GB, Microsoft
+  YaHei, Noto Sans SC. No CJK web font is shipped.
+- **Mono**: `ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas`
+  (referenced by name when installed; never bundled).
+- **No Apple font files** (SF Pro, SF Mono, PingFang) are ever bundled,
+  embedded or served.
+
+Seven steps only:
+
+| Step | Size / line height | Weight | Tracking | Use |
+|---|---|---|---|---|
+| Display | 48 / 1.08 (phone 34) | 700 | −0.015em | User home headline, login |
+| Title 1 | 32 / 1.125 (phone 28) | 700 | −0.01em | Page H1 |
+| Title 2 | 24 / 1.17 | 600 | −0.005em | Section heading |
+| Title 3 | 19 / 1.26 | 600 | 0 | Card and dialog titles |
+| Body | 15 / 1.47 (Chinese 1.6) | 400 | 0 | Text, tables |
+| Callout | 13 / 1.38 | 400 | 0 | Table headers, help text, labels |
+| Caption | 12 / 1.33 | 400/500 | 0 | Badges, timestamps (never essential information) |
+
+All numbers use `font-variant-numeric: tabular-nums`. Details:
+[`../guidelines/typography.md`](../guidelines/typography.md).
+
+## 5. Do and don't
+
+**Do**
+
+- Use the tile on the brand gradient as the primary mark; the glyph alone in
+  UI chrome.
+- Keep the clear space; place the mark on `--bg`, `--bg-elevated`, the
+  gradient or slate `#0F172A`.
+- Use `mark-glyph.svg` (currentColor) in the product UI so it follows the theme.
+- Reference colours through tokens only.
+
+**Don't**
+
+- Recolour the glyph (except white, black or `currentColor`), outline it, add
+  shadows or bevels, rotate or skew it, or change the stroke weights.
+- Put the gradient on buttons, links, text, charts or status badges.
+- Put the tile on a busy photo or on another gradient.
+- Write the name as "Anixops", "ANIXOPS" or split it as "Anix Ops".
+- Use Apple's fonts, SF Symbols, product images, logos or marketing copy, or
+  imitate Apple's own pages pixel for pixel. We follow the principles, not the
+  look of a specific company.
+
+## 6. Open items for approval
+
+1. Accent: `#4F5BE8` / `#818CF8` (and the dark fill `#5B63E6`), or an
+   alternative.
+2. Light success corrected to `#1A7F37`.
+3. Outline the production wordmark, then export PNG icon sizes (16, 32, 180,
+   192, 512) and an OG image from these sources.
