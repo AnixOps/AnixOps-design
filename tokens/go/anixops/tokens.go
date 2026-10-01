@@ -3,7 +3,7 @@
 package anixops
 
 // Version is the AnixOps Design version these tokens come from.
-const Version = "1.0.0"
+const Version = "1.0.1"
 
 // UI colours. Values are CSS colour strings (#RRGGBB or rgba()).
 var (

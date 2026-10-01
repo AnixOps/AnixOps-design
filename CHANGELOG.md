@@ -3,6 +3,17 @@
 All notable changes to AnixOps Design. Versions follow
 [Semantic Versioning](https://semver.org/) on token names and asset paths.
 
+## 1.0.1 - 2026-10-01
+
+### Changed
+
+- Naming: EasySSH and AnixOps-ssh merge into one product, AnixOps SSH.
+- Naming: AnixOps Studio is the maker of AnixOps products, not a product
+  name; it is not yet a legal entity, so legal text names the owner.
+- `LICENSE` and `LICENSE-BRAND.md`: copyright holder is now
+  "kalijerry (AnixOps Studio)" instead of "AnixOps", which is not a legal
+  entity.
+
 ## 1.0.0 - 2026-10-01
 
 First release. Palette and scope approved by the owner on 2026-10-01.

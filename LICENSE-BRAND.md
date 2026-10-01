@@ -1,6 +1,6 @@
 # AnixOps Brand Assets: Terms of Use
 
-Copyright (c) 2026 AnixOps. All rights reserved.
+Copyright (c) 2026 kalijerry (AnixOps Studio). All rights reserved.
 
 The following are **not** licensed under the MIT License in `LICENSE`:
 
