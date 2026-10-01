@@ -11,7 +11,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TOKENS = json.loads((ROOT / "tokens" / "tokens.json").read_text(encoding="utf-8"))["color"]
+ALL = json.loads((ROOT / "tokens" / "tokens.json").read_text(encoding="utf-8"))
+TOKENS = ALL["color"]
+TERMINAL = {k: v for k, v in ALL["terminal"].items() if not k.startswith("$")}
 
 
 def luminance(hex_colour):
@@ -67,6 +69,58 @@ PAIRS += [
 ]
 
 
+def xterm256(index):
+    """Hex value of an xterm-256 colour in the 6x6x6 cube (16-231) or grey ramp (232-255)."""
+    if index >= 232:
+        v = 8 + 10 * (index - 232)
+        return f"#{v:02X}{v:02X}{v:02X}"
+    levels = [0, 95, 135, 175, 215, 255]
+    i = index - 16
+    return "#" + "".join(f"{levels[n]:02X}" for n in (i // 36, i // 6 % 6, i % 6))
+
+
+def nearest256(hex_colour):
+    """Nearest xterm-256 index by redmean distance (the method used to pick the tokens)."""
+    def rgb(h):
+        return [int(h.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)]
+    a = rgb(hex_colour)
+
+    def dist(index):
+        b = rgb(xterm256(index))
+        r = (a[0] + b[0]) / 2
+        d = [a[i] - b[i] for i in range(3)]
+        return (2 + r / 256) * d[0] ** 2 + 4 * d[1] ** 2 + (2 + (255 - r) / 256) * d[2] ** 2
+    return min(range(16, 256), key=dist)
+
+
+# Terminal backgrounds: light terminals are close to white, dark ones to black or #1C1C1E.
+TERM_BGS = {"light": ["#FFFFFF"], "dark": ["#000000", "#1C1C1E"]}
+
+
+def terminal_table():
+    failures = 0
+    print()
+    print("| Role | Terminal | Colour | Background | Ratio | Target | Result |")
+    print("|---|---|---|---|---|---|---|")
+    for role, spec in TERMINAL.items():
+        target = 0 if role.startswith("brand") else 4.5
+        for theme in ("light", "dark"):
+            truecolor = spec[theme]["$value"]
+            index = spec[f"ansi256-{theme}"]["$value"]
+            if index != nearest256(truecolor):
+                print(f"{role} ansi256-{theme} is {index}, nearest to {truecolor} is {nearest256(truecolor)}",
+                      file=sys.stderr)
+                failures += 1
+            for label, colour in ((f"{theme} truecolor", truecolor), (f"{theme} 256 ({index})", xterm256(index))):
+                for bg in TERM_BGS[theme]:
+                    r = ratio(colour, bg)
+                    result = "info only" if target == 0 else ("pass" if r >= target else "FAIL")
+                    failures += result == "FAIL"
+                    print(f"| {role} | {label} | `{colour}` | `{bg}` | {r:.2f}:1 | "
+                          f"{'—' if target == 0 else f'{target}:1'} | {result} |")
+    return failures
+
+
 def main():
     failures = 0
     print("| Theme | Foreground | Background | Ratio | Target | Result |")
@@ -84,6 +138,7 @@ def main():
         label = lambda n, v: f"`{v}`" if n.startswith("#") else f"{n} `{v}`"
         print(f"| {theme} | {label(fg, fv)} | {label(bg, bv)} | {r:.2f}:1 | "
               f"{'—' if target == 0 else f'{target}:1'} | {result} |")
+    failures += terminal_table()
     if "--check" in sys.argv and failures:
         print(f"{failures} pair(s) below target", file=sys.stderr)
         return 1

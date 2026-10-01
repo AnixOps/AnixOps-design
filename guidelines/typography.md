@@ -10,7 +10,7 @@
 
 - Apple devices render their system font through `-apple-system`; nothing is
   bundled.
-- **Inter** is self-hosted (variable WOFF2, Latin subset only,
+- **Inter** is self-hosted from [`../fonts/inter/`](../fonts/inter/) (variable WOFF2, Latin subset only,
   `font-display: swap`, `unicode-range` limited to Latin) so non-Apple
   platforms get a close, neutral sans.
 - **Chinese** always comes from the system: PingFang SC (Apple), Microsoft

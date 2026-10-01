@@ -6,10 +6,15 @@ The following are **not** licensed under the MIT License in `LICENSE`:
 
 - the name "AnixOps" and product names that contain it (for example
   "AnixOps Control");
-- the AnixOps mark (the hexagon glyph) in every version, including the files
-  in `brand/assets/` (`mark.svg`, `mark-mono-white.svg`, `mark-mono-black.svg`,
-  `mark-glyph.svg`, `favicon.svg`) and any redrawing of them;
-- the wordmark and lockups (`wordmark.svg`).
+- the AnixOps mark (the hexagon glyph) in every version and any redrawing of
+  it, and the wordmark and lockups;
+- every file in `brand/assets/`, including the SVG sources, the favicon,
+  app icon, Tauri, social and banner rasters, and the ASCII mark, and any
+  asset generated with `scripts/build-assets.mjs`.
+
+The scripts that generate these assets are MIT; the assets they produce are
+not. Inter in `fonts/inter/` is licensed separately under the SIL Open Font
+License 1.1 (`fonts/inter/OFL.txt`).
 
 ## Permitted
 

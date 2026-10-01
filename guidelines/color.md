@@ -1,14 +1,15 @@
 # Colour
 
-> DRAFT — pending owner approval. Values live in
+> Approved 1.0.0 (2026-10-01). Values live in
 > [`../tokens/tokens.json`](../tokens/tokens.json); this page explains them.
 
 ## Rules
 
 1. **Neutrals carry the interface.** Large areas are `--bg`, `--bg-elevated`
    and `--bg-grouped`; text is `--label-1/2/3`. Colour is the exception.
-2. **One accent.** `--accent` marks what is interactive or selected: links,
-   the primary button, focus rings, the selected item. Never decoration.
+2. **One accent, for every product.** `--accent` marks what is interactive or
+   selected: links, the primary button, focus rings, the selected item. Never
+   decoration. Products do not get their own accent.
 3. **Status colours only for status.** Success, warning and danger appear on
    badges, inline alerts, chart thresholds and destructive actions, and always
    with a word or icon (never colour alone).
@@ -115,6 +116,57 @@ Targets: 4.5:1 for text, 3:1 for large text, UI boundaries and chart marks.
 | dark | brand.purple `#8B5CF6` | `#000000` | 4.96:1 | 3.0:1 | pass |
 | dark | brand.amber `#F59E0B` | `#000000` | 9.78:1 | 3.0:1 | pass |
 | light | `#1E8E3E` | `#FFFFFF` | 4.21:1 | — | info only |
+
+### Terminal
+
+Truecolor values and their xterm-256 fallbacks on typical terminal backgrounds
+([terminal](terminal.md)). The check also fails if a 256 index is not the
+nearest one to its truecolor value.
+
+| Role | Terminal | Colour | Background | Ratio | Target | Result |
+|---|---|---|---|---|---|---|
+| accent | light truecolor | `#4F5BE8` | `#FFFFFF` | 5.26:1 | 4.5:1 | pass |
+| accent | light 256 (62) | `#5F5FD7` | `#FFFFFF` | 5.12:1 | 4.5:1 | pass |
+| accent | dark truecolor | `#818CF8` | `#000000` | 7.04:1 | 4.5:1 | pass |
+| accent | dark truecolor | `#818CF8` | `#1C1C1E` | 5.70:1 | 4.5:1 | pass |
+| accent | dark 256 (105) | `#8787FF` | `#000000` | 6.94:1 | 4.5:1 | pass |
+| accent | dark 256 (105) | `#8787FF` | `#1C1C1E` | 5.62:1 | 4.5:1 | pass |
+| success | light truecolor | `#1A7F37` | `#FFFFFF` | 5.08:1 | 4.5:1 | pass |
+| success | light 256 (29) | `#00875F` | `#FFFFFF` | 4.53:1 | 4.5:1 | pass |
+| success | dark truecolor | `#30D158` | `#000000` | 10.39:1 | 4.5:1 | pass |
+| success | dark truecolor | `#30D158` | `#1C1C1E` | 8.42:1 | 4.5:1 | pass |
+| success | dark 256 (41) | `#00D75F` | `#000000` | 10.89:1 | 4.5:1 | pass |
+| success | dark 256 (41) | `#00D75F` | `#1C1C1E` | 8.82:1 | 4.5:1 | pass |
+| warning | light truecolor | `#B25000` | `#FFFFFF` | 5.20:1 | 4.5:1 | pass |
+| warning | light 256 (130) | `#AF5F00` | `#FFFFFF` | 4.71:1 | 4.5:1 | pass |
+| warning | dark truecolor | `#FF9F0A` | `#000000` | 10.22:1 | 4.5:1 | pass |
+| warning | dark truecolor | `#FF9F0A` | `#1C1C1E` | 8.28:1 | 4.5:1 | pass |
+| warning | dark 256 (214) | `#FFAF00` | `#000000` | 11.38:1 | 4.5:1 | pass |
+| warning | dark 256 (214) | `#FFAF00` | `#1C1C1E` | 9.22:1 | 4.5:1 | pass |
+| danger | light truecolor | `#D70015` | `#FFFFFF` | 5.38:1 | 4.5:1 | pass |
+| danger | light 256 (160) | `#D70000` | `#FFFFFF` | 5.40:1 | 4.5:1 | pass |
+| danger | dark truecolor | `#FF453A` | `#000000` | 6.16:1 | 4.5:1 | pass |
+| danger | dark truecolor | `#FF453A` | `#1C1C1E` | 4.99:1 | 4.5:1 | pass |
+| danger | dark 256 (203) | `#FF5F5F` | `#000000` | 7.05:1 | 4.5:1 | pass |
+| danger | dark 256 (203) | `#FF5F5F` | `#1C1C1E` | 5.72:1 | 4.5:1 | pass |
+| muted | light truecolor | `#6E6E73` | `#FFFFFF` | 5.07:1 | 4.5:1 | pass |
+| muted | light 256 (242) | `#6C6C6C` | `#FFFFFF` | 5.25:1 | 4.5:1 | pass |
+| muted | dark truecolor | `#8E8E93` | `#000000` | 6.44:1 | 4.5:1 | pass |
+| muted | dark truecolor | `#8E8E93` | `#1C1C1E` | 5.22:1 | 4.5:1 | pass |
+| muted | dark 256 (246) | `#949494` | `#000000` | 6.92:1 | 4.5:1 | pass |
+| muted | dark 256 (246) | `#949494` | `#1C1C1E` | 5.61:1 | 4.5:1 | pass |
+| brand-start | light truecolor | `#38BDF8` | `#FFFFFF` | 2.14:1 | — | info only |
+| brand-start | light 256 (75) | `#5FAFFF` | `#FFFFFF` | 2.32:1 | — | info only |
+| brand-start | dark truecolor | `#38BDF8` | `#000000` | 9.80:1 | — | info only |
+| brand-start | dark truecolor | `#38BDF8` | `#1C1C1E` | 7.94:1 | — | info only |
+| brand-start | dark 256 (75) | `#5FAFFF` | `#000000` | 9.06:1 | — | info only |
+| brand-start | dark 256 (75) | `#5FAFFF` | `#1C1C1E` | 7.34:1 | — | info only |
+| brand-end | light truecolor | `#6366F1` | `#FFFFFF` | 4.47:1 | — | info only |
+| brand-end | light 256 (63) | `#5F5FFF` | `#FFFFFF` | 4.60:1 | — | info only |
+| brand-end | dark truecolor | `#6366F1` | `#000000` | 4.70:1 | — | info only |
+| brand-end | dark truecolor | `#6366F1` | `#1C1C1E` | 3.81:1 | — | info only |
+| brand-end | dark 256 (63) | `#5F5FFF` | `#000000` | 4.57:1 | — | info only |
+| brand-end | dark 256 (63) | `#5F5FFF` | `#1C1C1E` | 3.70:1 | — | info only |
 
 ### Pairs below 4.5:1 and where they are allowed
 
