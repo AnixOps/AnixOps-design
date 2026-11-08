@@ -1,6 +1,7 @@
 # AnixOps Brand
 
-> Version 1.0.0, approved by the owner on 2026-10-01. Products use these
+> Version 1.1.0. Palette approved by the owner on 2026-10-01; the orbit-A
+> mark approved on 2026-11-08. Products use these
 > values through tokens only, so a later change lands in one place.
 
 ## 1. Purpose
@@ -20,9 +21,11 @@ product list and rules are in [`../guidelines/naming.md`](../guidelines/naming.m
 
 ## 2. The mark
 
-The mark is a hexagon (a cube seen corner-on) enclosing a hub with spokes: a
-control point that reaches every node. It is redrawn from the de-facto brand,
-the Control Center app icon, as clean geometry.
+The mark is an **A whose crossbar is an orbit**: two legs meet under an apex
+node, the control point, and a tilted orbit carrying a satellite node circles
+through the letter, passing behind the legs at the top and in front of them at
+the bottom. It reads as the initial of AnixOps and as one control point keeping
+every node in its orbit. It replaced the 1.0 hexagon-and-hub mark in 1.1.0.
 
 ### 2.1 Construction
 
@@ -31,22 +34,24 @@ with round joins and caps; nothing is traced.
 
 | Element | Geometry |
 |---|---|
-| Hexagon ring | Centre-line vertices (12, 3), (20.5, 7.25), (20.5, 16.75), (12, 21), (3.5, 16.75), (3.5, 7.25). Slanted edges rise 1 unit per 2 across (slope 1:2), as in the app icon. Stroke 2.5 |
-| Spine | (12, 6) to (12, 18). Stroke 1.75 |
-| Arms | (6.5, 9.25) to (12, 12) to (17.5, 9.25): parallel to the upper hexagon edges. Stroke 1.75 |
-| Floor | (6.5, 15.25) to (12, 18) to (17.5, 15.25): parallel to the lower edges. Stroke 1.75 |
-| Hub | Circle at (12, 12), radius 2.75 (1.0.0: 2.25, enlarged in 1.0.2 so it reads as a node and the arcs between spokes stay smooth) |
+| Legs | (4.2, 21.6) to (12, 4.5) to (19.8, 21.6). Stroke 3.3 |
+| Apex node | Circle at (12, 3.9), radius 2.6 |
+| Orbit | Ellipse centred (12, 14.4), radii 10.5 × 3.6, rotated −14°. Stroke 1.8. The upper half passes behind the legs, the lower half in front |
+| Satellite | Circle on the front half of the orbit, at 30° from its right end (21.26, 13.95), radius 1.6 |
+| Gaps | Where one stroke passes over another, the stroke underneath is cut 0.9 units on each side; the orbit is also cut 0.9 units around the satellite |
 
-The spokes stop 1.75 units short of the ring so the glyph stays open at small
-sizes. The outer extent is 19.5 × 20.5 units.
+The gaps make the over/under weave readable in a single colour, so the mono
+and `currentColor` versions keep the depth without a second tone. The outer
+extent is about 22.3 × 22 units.
 
 **Tile** (`mark.svg`): a 64-unit rounded square, corner radius 14 (22 % of the
-side, matching the app icon), filled with the brand gradient at 135°. The
-glyph is scaled 1.5× and centred (offset 14), so it fills about 46 % of the
-tile.
+side), filled with slate `#0F172A` (`brand.slate-900`) and edged with a 1-unit
+white hairline at 8 % opacity so it holds its edge on black. The glyph carries
+the brand gradient at 135°, scaled 1.5× and centred (offset 14).
 
-**Favicon** (`favicon.svg`): a 32-unit tile, radius 7. The floor chevron is dropped, the ring is 3 units and the spokes 2.5 units,
-so every stroke stays at least one device pixel wide at 16 px.
+**Favicon** (`favicon.svg`): a 32-unit tile, radius 7. The satellite is
+dropped and the strokes thicken (legs 4.2, orbit 2.4, apex radius 2.9, gaps
+1.2) so every line stays at least one device pixel wide at 16 px.
 
 ### 2.2 Clear space and minimum size
 
@@ -64,7 +69,7 @@ above; never edit one by hand.
 | File | Use it for |
 |---|---|
 | [`assets/mark.svg`](assets/mark.svg) | Default. Login page, about dialogs, social avatars, docs |
-| [`assets/mark-mono-white.svg`](assets/mark-mono-white.svg) | Glyph on dark or photographic backgrounds, on the brand gradient, on dark slate |
+| [`assets/mark-mono-white.svg`](assets/mark-mono-white.svg) | Glyph on dark or photographic backgrounds, on the brand gradient, on dark slate; also the Android themed-icon source (`app-icon-monochrome.svg`) |
 | [`assets/mark-mono-black.svg`](assets/mark-mono-black.svg) | Glyph on light backgrounds where colour is unavailable: print, fax, engraving, one-colour merch |
 | [`assets/mark-glyph.svg`](assets/mark-glyph.svg) | `fill`/`stroke` = `currentColor`. Inline in UI next to text (navigation bar, sidebar header), so it follows `--label-1` in both themes |
 | [`assets/favicon.svg`](assets/favicon.svg) | The simplified small-size version (16–32 px): browser tab, bookmarks, small desktop icons |
@@ -75,8 +80,9 @@ above; never edit one by hand.
 | [`assets/ascii-mark.txt`](assets/ascii-mark.txt) | Three-line ASCII mark for terminals ([terminal](../guidelines/terminal.md)) |
 
 The maskable and adaptive icons keep the glyph inside the central safe zone
-(glyph box 50 % of the canvas); the iOS icon is flattened, as the App Store
-rejects transparency.
+(glyph box 50 % of the canvas); the Android adaptive layers are the gradient
+glyph over slate, with a white glyph for themed icons; the iOS icon is
+flattened onto slate, as the App Store rejects transparency.
 
 ### 2.4 Wordmark and lockup
 
@@ -99,7 +105,7 @@ follows the theme:
 ```
 
 In dark mode the lockup text uses `--label-1` / `--label-2` (light text); the
-tile keeps its gradient.
+tile stays slate with the gradient glyph.
 
 ## 3. Colour
 
@@ -108,12 +114,15 @@ computed with `scripts/contrast.py`, never estimated.
 
 ### 3.1 Brand gradient
 
-`#0EA5E9 → #6366F1` at 135°. **Brand moments only**: the logo tile, the login
-page backdrop, the hero numbers on the user home page, marketing headers.
-**Never** for controls, links, body text or status. White on `#0EA5E9` is
-2.77:1 and white on `#6366F1` 4.47:1, so text on the gradient fails WCAG. The
-mark is exempt as a logo, but the white glyph is still kept at **3:1 or more
-wherever it sits on the gradient** (3.36:1 at its top-left vertex), so it
+`#0EA5E9 → #6366F1` at 135°. **Brand moments only**: the glyph of the mark,
+the login page backdrop, the hero numbers on the user home page, marketing
+headers. **Never** for controls, links, body text or status. White on
+`#0EA5E9` is 2.77:1 and white on `#6366F1` 4.47:1, so text on the gradient
+fails WCAG.
+
+In the mark the gradient is the glyph colour on the slate tile. The mark is
+exempt as a logo, but the glyph is still kept at **3:1 or more wherever it
+sits on the tile** (6.44:1 at the cyan end, 4.00:1 at the indigo end), so it
 stays solid at small sizes; `scripts/contrast.py --check` enforces this.
 
 ### 3.2 Accent
@@ -209,8 +218,8 @@ All numbers use `font-variant-numeric: tabular-nums`. Details:
 
 **Do**
 
-- Use the tile on the brand gradient as the primary mark; the glyph alone in
-  UI chrome.
+- Use the slate tile with the gradient glyph as the primary mark; the glyph
+  alone in UI chrome.
 - Keep the clear space; place the mark on `--bg`, `--bg-elevated`, the
   gradient or slate `#0F172A`.
 - Use `mark-glyph.svg` (currentColor) in the product UI so it follows the theme.
@@ -218,8 +227,12 @@ All numbers use `font-variant-numeric: tabular-nums`. Details:
 
 **Don't**
 
-- Recolour the glyph (except white, black or `currentColor`), outline it, add
-  shadows or bevels, rotate or skew it, or change the stroke weights.
+- Recolour the glyph (except the brand gradient, white, black or
+  `currentColor`), outline it, add shadows or bevels, rotate or skew it,
+  change the stroke weights, or close the gaps where the orbit crosses the
+  legs.
+- Put a white glyph on a blue or gradient tile: that is the look of other
+  well-known app icons, not ours.
 - Put the gradient on buttons, links, text, charts or status badges.
 - Put the tile on a busy photo or on another gradient.
 - Write the name as "Anixops", "ANIXOPS" or split it as "Anix Ops".
@@ -240,3 +253,11 @@ All numbers use `font-variant-numeric: tabular-nums`. Details:
    [`../guidelines/naming.md`](../guidelines/naming.md).
 5. 1.0.0 includes the terminal palette, the naming guide, platform exports
    and the full icon set.
+
+## 7. Decisions (owner, 2026-11-08)
+
+1. The mark becomes the orbit A (section 2), chosen over a layered-stack
+   alternative. The earlier stick-built "node A" draft was rejected because a
+   white A on a blue tile reads as Apple's App Store icon.
+2. The tile becomes slate with the gradient on the glyph; the palette and
+   every token value stay as approved on 2026-10-01.

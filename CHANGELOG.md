@@ -3,6 +3,39 @@
 All notable changes to AnixOps Design. Versions follow
 [Semantic Versioning](https://semver.org/) on token names and asset paths.
 
+## 1.1.0 - 2026-11-08
+
+### Changed
+
+- New mark: the orbit A. Two legs meet under an apex node, and a tilted
+  orbit with a satellite node passes behind the legs at the top and in front
+  at the bottom, with cut gaps so the weave reads in one colour. Replaces the
+  hexagon-and-hub mark; geometry in `brand/brand.md` 2.1, owner decision in
+  section 7.
+- Tile: slate `#0F172A` (`brand.slate-900`) with the brand gradient on the
+  glyph and a white hairline at 8 % for edge definition on black, instead of
+  a gradient tile with a white glyph. The glyph is at least 4.00:1 on the tile
+  (was 3.36:1); `scripts/contrast.py --check` now checks the gradient on
+  slate.
+- Favicon variant: no satellite, heavier strokes for 16 px.
+- Android adaptive icon: gradient glyph over a slate background; iOS icon
+  flattened onto slate.
+- ASCII mark redrawn as the orbit A, so `anixops.Banner` (Go) and
+  `term::ASCII_MARK` (Rust) change their first three lines.
+- Every brand asset regenerated. Asset paths and token names are unchanged;
+  token values are unchanged.
+
+### Added
+
+- `brand/assets/app-icon-monochrome.svg`: white glyph for Android themed
+  icons (previously the white foreground doubled as the monochrome layer).
+
+### Fixed
+
+- `scripts/build-assets.mjs` loads the Inter fonts from the exact file bytes.
+  Passing `Buffer.buffer` broke on newer Node versions, where it can be a
+  shared pool with an offset; output is byte-identical.
+
 ## 1.0.2 - 2026-10-01
 
 ### Changed

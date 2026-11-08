@@ -6,7 +6,7 @@ The following are **not** licensed under the MIT License in `LICENSE`:
 
 - the name "AnixOps" and product names that contain it (for example
   "AnixOps Control");
-- the AnixOps mark (the hexagon glyph) in every version and any redrawing of
+- the AnixOps mark (the orbit-A glyph, and the earlier hexagon glyph) in every version and any redrawing of
   it, and the wordmark and lockups;
 - every file in `brand/assets/`, including the SVG sources, the favicon,
   app icon, Tauri, social and banner rasters, and the ASCII mark, and any

@@ -10,14 +10,14 @@ AnixOps Control, AnixOps Control Center (web, mobile and TUI), AnixOps Agent
 and every other AnixOps app, CLI and site use the same mark, palette, type and
 rules.
 
-**Version 1.0.2** (2026-10-01). See [`CHANGELOG.md`](CHANGELOG.md).
+**Version 1.1.0** (2026-11-08). See [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Contents
 
 | Path | What it holds |
 |---|---|
 | [`brand/brand.md`](brand/brand.md) | The brand spec: mark, construction, versions, palette, typography, do and don't, decisions |
-| [`brand/assets/`](brand/assets/) | Mark (gradient tile, mono white and black, `currentColor` glyph), small-size favicon, outlined wordmarks, app icon sources, and the raster sets: favicon, PWA, iOS/Android, Tauri, OG image, README banners, ASCII mark |
+| [`brand/assets/`](brand/assets/) | Mark (slate tile with the gradient orbit A, mono white and black, `currentColor` glyph), small-size favicon, outlined wordmarks, app icon sources, and the raster sets: favicon, PWA, iOS/Android, Tauri, OG image, README banners, ASCII mark |
 | [`tokens/tokens.json`](tokens/tokens.json) | Source of truth in [W3C Design Tokens](https://design-tokens.github.io/community-group/format/) format: colour (light and dark), terminal palette, type scale, spacing, size, radius, shadow, motion, z-index, breakpoints |
 | [`tokens/`](tokens/) | Generated per platform: `css/`, `tailwind/` (v3 preset, v4 theme), `element-plus/`, `flutter/`, `go/anixops/` (Go module), `rust/`. Do not edit by hand |
 | [`fonts/inter/`](fonts/inter/) | Self-hosted Inter (variable, Latin subset) with `@font-face` CSS; SIL OFL 1.1 |
