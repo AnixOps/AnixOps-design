@@ -53,7 +53,7 @@ func TestColorEnabled(t *testing.T) {
 
 func TestBanner(t *testing.T) {
 	got := Banner("AnixOps Agent", "1.4.2")
-	want := "  ___\n / o \\   AnixOps Agent\n \\___/   1.4.2\n"
+	want := "   o\n (/-\\)   AnixOps Agent\n /   \\   1.4.2\n"
 	if got != want {
 		t.Errorf("Banner:\n%s\nwant:\n%s", got, want)
 	}

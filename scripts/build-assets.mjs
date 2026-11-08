@@ -24,26 +24,62 @@ const C = Object.fromEntries(
     Object.entries(tokens.color[g]).filter(([k]) => !k.startsWith("$")).map(([k, v]) => [k, v.$value]))]),
 );
 
-const font = (weight) => opentype.parse(readFileSync(
-  join(ROOT, "node_modules", "@fontsource", "inter", "files", `inter-latin-${weight}-normal.woff`)).buffer);
+// Pass exactly the file's bytes: a Buffer's .buffer can be a larger shared pool with an offset.
+const font = (weight) => {
+  const b = readFileSync(join(ROOT, "node_modules", "@fontsource", "inter", "files", `inter-latin-${weight}-normal.woff`));
+  return opentype.parse(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength));
+};
 const INTER = { 400: font(400), 600: font(600), 700: font(700) };
 
 // ------------------------------------------------------------------ geometry
-// The mark on its 24-unit grid (see brand/brand.md, 2.1). The favicon variant drops the
-// floor chevron and thickens strokes so every line stays one device pixel wide at 16 px.
+// The mark on its 24-unit grid (see brand/brand.md, 2.1): an "A" whose crossbar is an orbit.
+// Two legs meet under an apex node; a tilted elliptical orbit passes behind the legs at the
+// top and in front of them at the bottom, carrying one satellite node. Where one stroke
+// passes over another, the stroke underneath is cut by `gap` on each side, so the weave
+// reads in one colour too (mono and currentColor versions).
+// The favicon variant drops the satellite and thickens every stroke for 16 px.
+const LEGS = "M4.2 21.6 12 4.5 19.8 21.6";
+const APEX = [12, 3.9];
+const ORBIT = { cx: 12, cy: 14.4, rx: 10.5, angle: -14 };
 const GLYPH = {
-  full: { ring: 2.5, spokes: 1.75, hub: 2.75, spokePath: "M12 6v12M6.5 9.25 12 12l5.5-2.75M6.5 15.25 12 18l5.5-2.75" },
-  small: { ring: 3, spokes: 2.5, hub: 2.75, spokePath: "M12 7v5M7 9.5 12 12l5-2.5M12 12v6" },
+  full: { legs: 3.3, orbit: 1.8, ry: 3.6, apex: 2.6, satellite: 1.6, gap: 0.9 },
+  small: { legs: 4.2, orbit: 2.4, ry: 3.8, apex: 2.9, satellite: 0, gap: 1.2 },
 };
-const RING = "M12 3 20.5 7.25v9.5L12 21l-8.5-4.25v-9.5z";
 
 const n = (x) => +x.toFixed(3);
 
+/** Point on the orbit at parameter `t` degrees (0 = right end, 90 = front-most point). */
+function orbitPoint(t, ry) {
+  const a = (t * Math.PI) / 180, r = (ORBIT.angle * Math.PI) / 180;
+  const x = ORBIT.rx * Math.cos(a), y = ry * Math.sin(a);
+  return [ORBIT.cx + x * Math.cos(r) - y * Math.sin(r), ORBIT.cy + x * Math.sin(r) + y * Math.cos(r)];
+}
+
+// Masks need ids that are unique inside one SVG; a running counter keeps output deterministic.
+let uid = 0;
+
 function glyph(colour, variant = "full") {
   const g = GLYPH[variant];
-  return `<g fill="none" stroke="${colour}" stroke-linejoin="round" stroke-linecap="round">`
-    + `<path stroke-width="${g.ring}" d="${RING}"/><path stroke-width="${g.spokes}" d="${g.spokePath}"/></g>`
-    + `<circle cx="12" cy="12" r="${g.hub}" fill="${colour}"/>`;
+  const k = ++uid;
+  const frame = `transform="translate(${ORBIT.cx} ${ORBIT.cy}) rotate(${ORBIT.angle})"`;
+  const back = `<path ${frame} d="M${ORBIT.rx} 0A${ORBIT.rx} ${g.ry} 0 0 0 -${ORBIT.rx} 0"/>`;
+  const front = `<path ${frame} d="M-${ORBIT.rx} 0A${ORBIT.rx} ${g.ry} 0 0 0 ${ORBIT.rx} 0"/>`;
+  const sat = g.satellite ? orbitPoint(30, g.ry).map(n) : null;
+  const all = `<rect x="-2" y="-2" width="28" height="28" fill="#FFFFFF"/>`;
+  const cut = (w, body) => `<g fill="none" stroke="#000000" stroke-width="${n(w)}" stroke-linecap="round">${body}</g>`;
+  const masks = `<mask id="b${k}" maskUnits="userSpaceOnUse" x="-2" y="-2" width="28" height="28">${all}`
+      + cut(g.legs + 2 * g.gap, `<path d="${LEGS}" stroke-linejoin="round"/>`) + `</mask>`
+    + `<mask id="l${k}" maskUnits="userSpaceOnUse" x="-2" y="-2" width="28" height="28">${all}`
+      + cut(g.orbit + 2 * g.gap, front) + `</mask>`
+    + (sat ? `<mask id="f${k}" maskUnits="userSpaceOnUse" x="-2" y="-2" width="28" height="28">${all}`
+      + `<circle cx="${sat[0]}" cy="${sat[1]}" r="${n(g.satellite + g.gap)}" fill="#000000"/></mask>` : "");
+  return `<defs>${masks}</defs>`
+    + `<g fill="none" stroke="${colour}" stroke-linecap="round" stroke-linejoin="round">`
+    + `<g stroke-width="${g.orbit}" mask="url(#b${k})">${back}</g>`
+    + `<path stroke-width="${g.legs}" d="${LEGS}" mask="url(#l${k})"/>`
+    + `<g stroke-width="${g.orbit}"${sat ? ` mask="url(#f${k})"` : ""}>${front}</g></g>`
+    + `<circle cx="${APEX[0]}" cy="${APEX[1]}" r="${g.apex}" fill="${colour}"/>`
+    + (sat ? `<circle cx="${sat[0]}" cy="${sat[1]}" r="${g.satellite}" fill="${colour}"/>` : "");
 }
 
 /** The glyph scaled so its 24-unit box is `box` px wide, centred at (cx, cy). */
@@ -52,15 +88,23 @@ function placedGlyph(colour, cx, cy, box, variant = "full") {
   return `<g transform="translate(${n(cx - box / 2)} ${n(cy - box / 2)}) scale(${n(s)})">${glyph(colour, variant)}</g>`;
 }
 
+// The glyph's gradient lives in the glyph's own 24-unit space, so every stroke and node
+// shares one continuous 135° gradient instead of each shape getting its own.
 const gradientDef = (id = "g") =>
-  `<linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C.brand["gradient-start"]}"/>`
+  `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="2" y1="2" x2="22" y2="22">`
+  + `<stop offset="0" stop-color="${C.brand["gradient-start"]}"/>`
   + `<stop offset="1" stop-color="${C.brand["gradient-end"]}"/></linearGradient>`;
 
-/** Gradient tile of side `size` at (x, y); radius 22 % of the side, glyph box 56.25 % (36/64). */
+/** Slate tile of side `size` at (x, y) with the gradient glyph; radius 22 % of the side,
+ *  glyph box 56.25 % (36/64). A hairline keeps the tile's edge visible on black. */
 function tile(x, y, size, { rounded = true, variant = "full", box = 0.5625, id = "g" } = {}) {
   const r = rounded ? ` rx="${n(size * 0.21875)}"` : "";
-  return `<rect x="${n(x)}" y="${n(y)}" width="${n(size)}" height="${n(size)}"${r} fill="url(#${id})"/>`
-    + placedGlyph("#FFFFFF", x + size / 2, y + size / 2, size * box, variant);
+  const hairline = rounded
+    ? `<rect x="${n(x + size / 128)}" y="${n(y + size / 128)}" width="${n(size - size / 64)}" height="${n(size - size / 64)}"`
+      + ` rx="${n(size * 0.21875 - size / 128)}" fill="none" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="${n(size / 64)}"/>`
+    : "";
+  return `<rect x="${n(x)}" y="${n(y)}" width="${n(size)}" height="${n(size)}"${r} fill="${C.brand["slate-900"]}"/>`
+    + hairline + placedGlyph(`url(#${id})`, x + size / 2, y + size / 2, size * box, variant);
 }
 
 function svg(w, h, title, body, defs = "") {
@@ -148,9 +192,11 @@ const SOURCES = {
   // Full-bleed squares for platforms that apply their own mask (iOS, PWA maskable, Android).
   "app-icon.svg": () => svg(1024, 1024, "AnixOps", tile(0, 0, 1024, { rounded: false }), gradientDef()),
   "app-icon-maskable.svg": () => svg(512, 512, "AnixOps", tile(0, 0, 512, { rounded: false, box: 0.5 }), gradientDef()),
-  "app-icon-foreground.svg": () => svg(1024, 1024, "AnixOps", placedGlyph("#FFFFFF", 512, 512, 512)),
+  "app-icon-foreground.svg": () => svg(1024, 1024, "AnixOps", placedGlyph("url(#g)", 512, 512, 512), gradientDef()),
   "app-icon-background.svg": () => svg(1024, 1024, "AnixOps",
-    `<rect width="1024" height="1024" fill="url(#g)"/>`, gradientDef()),
+    `<rect width="1024" height="1024" fill="${C.brand["slate-900"]}"/>`),
+  // Android 13 themed icons: one colour, the system tints it.
+  "app-icon-monochrome.svg": () => svg(1024, 1024, "AnixOps", placedGlyph("#FFFFFF", 512, 512, 512)),
   "banner/readme-banner-light.svg": () => banner("", "light"),
   "banner/readme-banner-dark.svg": () => banner("", "dark"),
   "social/og-image.svg": () => ogImage(""),
@@ -201,11 +247,11 @@ async function rasters(src) {
   await add("favicon/icon-512.png", mark, 512);
   await add("favicon/icon-maskable-512.png", src["app-icon-maskable.svg"], 512);
 
-  // Mobile (Flutter: flutter_launcher_icons) — iOS forbids alpha, so flatten onto the gradient start.
-  await add("app-icon/app-icon-1024.png", src["app-icon.svg"], 1024, 1024, { flatten: C.brand["gradient-start"] });
+  // Mobile (Flutter: flutter_launcher_icons) — iOS forbids alpha, so flatten onto the tile slate.
+  await add("app-icon/app-icon-1024.png", src["app-icon.svg"], 1024, 1024, { flatten: C.brand["slate-900"] });
   await add("app-icon/app-icon-foreground-1024.png", src["app-icon-foreground.svg"], 1024);
   await add("app-icon/app-icon-background-1024.png", src["app-icon-background.svg"], 1024);
-  await add("app-icon/app-icon-monochrome-1024.png", src["app-icon-foreground.svg"], 1024);
+  await add("app-icon/app-icon-monochrome-1024.png", src["app-icon-monochrome.svg"], 1024);
 
   // Desktop (Tauri: src-tauri/icons)
   for (const [name, s] of [["32x32.png", 32], ["128x128.png", 128], ["128x128@2x.png", 256], ["icon.png", 512]]) {

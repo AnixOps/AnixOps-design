@@ -77,11 +77,11 @@ def gradient_at(t):
     return "#" + "".join(f"{round(ca[i] * (1 - t) + cb[i] * t):02X}" for i in range(3))
 
 
-# The white glyph on the tile must stay at 3:1 (UI graphics) wherever it sits. The gradient
-# runs at 135 degrees, so t = (x + y) / 2 in tile units; the glyph box is 56.25 % of the tile,
-# centred, and its lightest point is the ring's top-left vertex (3.5, 7.25) on the 24 grid.
-GLYPH_T = (0.21875 + 3.5 / 24 * 0.5625 + 0.21875 + 7.25 / 24 * 0.5625) / 2
-PAIRS.append(("light", "#FFFFFF", gradient_at(GLYPH_T), 3.0))
+# Since 1.1.0 the glyph carries the gradient and the tile is slate-900. The glyph must stay at
+# 3:1 (UI graphics) on the tile wherever it sits, so check both ends of the gradient and its
+# midpoint; the darker indigo end is the binding one.
+for t in (0, 0.5, 1):
+    PAIRS.append(("dark", gradient_at(t), "brand.slate-900", 3.0))
 
 
 def xterm256(index):

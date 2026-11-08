@@ -3,7 +3,7 @@
 package anixops
 
 // Version is the AnixOps Design version these tokens come from.
-const Version = "1.0.2"
+const Version = "1.1.0"
 
 // UI colours. Values are CSS colour strings (#RRGGBB or rgba()).
 var (
@@ -71,7 +71,7 @@ var (
 
 // ASCIIMark is the three-line ASCII mark used in banners and --version output.
 var ASCIIMark = [...]string{
-	"  ___",
-	" / o \\",
-	" \\___/",
+	"   o",
+	" (/-\\)",
+	" /   \\",
 }

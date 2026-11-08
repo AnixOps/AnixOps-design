@@ -13,8 +13,8 @@
 3. **Status colours only for status.** Success, warning and danger appear on
    badges, inline alerts, chart thresholds and destructive actions, and always
    with a word or icon (never colour alone).
-4. **The brand gradient only for brand moments**: logo tile, login backdrop,
-   user home hero numbers. Never on controls or text.
+4. **The brand gradient only for brand moments**: the logo glyph, login
+   backdrop, user home hero numbers. Never on controls or text.
 5. **Filled controls use `-fill` tokens.** `--accent-fill` and
    `--danger-fill` exist because the dark text colours (`#818CF8`, `#FF453A`)
    are too light for white text.
@@ -116,7 +116,9 @@ Targets: 4.5:1 for text, 3:1 for large text, UI boundaries and chart marks.
 | dark | brand.purple `#8B5CF6` | `#000000` | 4.96:1 | 3.0:1 | pass |
 | dark | brand.amber `#F59E0B` | `#000000` | 9.78:1 | 3.0:1 | pass |
 | light | `#1E8E3E` | `#FFFFFF` | 4.21:1 | — | info only |
-| light | `#FFFFFF` | `#2B8FEC` | 3.36:1 | 3.0:1 | pass |
+| dark | `#0EA5E9` | brand.slate-900 `#0F172A` | 6.44:1 | 3.0:1 | pass |
+| dark | `#3886ED` | brand.slate-900 `#0F172A` | 4.93:1 | 3.0:1 | pass |
+| dark | `#6366F1` | brand.slate-900 `#0F172A` | 4.00:1 | 3.0:1 | pass |
 
 ### Terminal
 
@@ -175,7 +177,7 @@ nearest one to its truecolor value.
 |---|---|---|
 | `--label-3` on light backgrounds | 3.33–3.62:1 | Non-essential text ≥ 14 px only (placeholders, secondary timestamps) |
 | Chart colours, `--accent-fill` as a boundary | 3.26–5.26:1 vs 3:1 target | Graphics and control boundaries, not text |
-| White on `#0EA5E9` / `#6366F1` | 2.77 / 4.47:1 | The logo only (logotypes are exempt); the glyph itself is checked at ≥ 3:1 where it sits (last row of the table above) |
+| White on `#0EA5E9` / `#6366F1` | 2.77 / 4.47:1 | Not used for text. Since 1.1.0 the logo puts the gradient on the glyph over slate `#0F172A`, checked at ≥ 3:1 (the last three rows of the table above) |
 | White on dark `#818CF8` | 2.98:1 | Not used: dark filled buttons use `--accent-fill` `#5B63E6` |
 | Amber `#F59E0B` on white | 2.15:1 | Illustrations in dark contexts only |
 | `#1E8E3E` on white | 4.21:1 | Not used: replaced by `#1A7F37` |

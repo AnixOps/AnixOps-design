@@ -1,6 +1,6 @@
 {
   "name": "anixops-design",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "private": true,
   "description": "AnixOps brand, visual identity and design tokens. Node is only needed to regenerate the raster assets.",
   "license": "MIT",

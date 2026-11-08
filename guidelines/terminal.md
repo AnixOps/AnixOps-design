@@ -55,9 +55,9 @@ stands in for the logo in terminals. Plain ASCII, so it survives every font
 and log viewer:
 
 ```text
-  ___
- / o \   AnixOps Agent
- \___/   1.4.2
+   o
+ (/-\)   AnixOps Agent
+ /   \   1.4.2
 ```
 
 - `--version` prints the banner on a terminal and a single line
