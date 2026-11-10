@@ -180,6 +180,16 @@ function ogImage(product) {
     + `<g transform="translate(${n((W - run.width) / 2)} ${n(top + T + GAP + CAP)})">${run.body}</g>`, defs);
 }
 
+/** The organisation mark (brand.md 2.5): a bold A whose crossbar is a dot, the O of Ops.
+ *  Full bleed, because hosts crop profile pictures to a rounded square or a circle. */
+function orgAvatar() {
+  const S = 1024, box = S * 0.7;
+  return svg(S, S, "AnixOps", `<rect width="${S}" height="${S}" fill="${C.brand["slate-900"]}"/>`
+    + `<g transform="translate(${n((S - box) / 2)} ${n((S - box) / 2)}) scale(${n(box / 24)})">`
+    + `<path d="M3.6 20.1 12 3.7 20.4 20.1" fill="none" stroke="url(#g)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`
+    + `<circle cx="12" cy="17.5" r="2.7" fill="${C.dark["label-1"]}"/></g>`, gradientDef());
+}
+
 // ------------------------------------------------------------------ SVG sources
 const SOURCES = {
   "mark.svg": () => svg(64, 64, "AnixOps", tile(0, 0, 64), gradientDef()),
@@ -200,9 +210,7 @@ const SOURCES = {
   "banner/readme-banner-light.svg": () => banner("", "light"),
   "banner/readme-banner-dark.svg": () => banner("", "dark"),
   "social/og-image.svg": () => ogImage(""),
-  // Profile picture for GitHub and other hosts that crop to a rounded square or a circle:
-  // full bleed, glyph box 66 % so the orbit stays a pixel wide at 20 px and clears a circle crop.
-  "social/org-avatar.svg": () => svg(1024, 1024, "AnixOps", tile(0, 0, 1024, { rounded: false, box: 0.65625 }), gradientDef()),
+  "social/org-avatar.svg": () => orgAvatar(),
 };
 
 // ------------------------------------------------------------------ rasters

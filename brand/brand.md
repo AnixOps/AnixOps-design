@@ -77,7 +77,7 @@ above; never edit one by hand.
 | `assets/app-icon*.svg` | Full-bleed sources for platforms that apply their own mask (iOS, Android adaptive, PWA maskable) |
 | `assets/favicon/`, `assets/app-icon/`, `assets/tauri/` | Raster sets: ICO, PNG and ICNS sizes for web, mobile and desktop ([platforms](../guidelines/platforms.md#assets-per-platform)) |
 | `assets/social/og-image.*`, `assets/banner/readme-banner-*` | Link preview (1200 × 630) and README banner (light and dark) |
-| `assets/social/org-avatar.*` | Profile picture for the GitHub organisation and other accounts (1024 × 1024, full bleed). The host crops it to a rounded square or a circle, so the glyph box is 66 % of the canvas: large enough to read at 20 px, small enough to clear a circle |
+| `assets/social/org-avatar.*` | The organisation mark (section 2.5): profile picture for the GitHub organisation and other AnixOps accounts |
 | [`assets/ascii-mark.txt`](assets/ascii-mark.txt) | Three-line ASCII mark for terminals ([terminal](../guidelines/terminal.md)) |
 
 The maskable and adaptive icons keep the glyph inside the central safe zone
@@ -107,6 +107,23 @@ follows the theme:
 
 In dark mode the lockup text uses `--label-1` / `--label-2` (light text); the
 tile stays slate with the gradient glyph.
+
+### 2.5 Organisation mark
+
+The AnixOps organisation itself (its GitHub profile and other accounts that
+speak for the maker, not for one product) has its own mark, so it is not
+confused with a product's app icon, which carries the orbit A. It is a **bold
+A whose crossbar is a dot**: the A of Anix and the O of Ops.
+
+| Element | Geometry (24-unit grid) |
+|---|---|
+| Legs | (3.6, 20.1) to (12, 3.7) to (20.4, 20.1). Stroke 5, round joins and caps, brand gradient |
+| Dot | Circle at (12, 17.5), radius 2.7, `#F5F5F7` (dark `--label-1`) |
+| Canvas | 1024 × 1024, full bleed slate `#0F172A`, glyph box 70 % of the side |
+
+It is flat: no shadow, bevel or gloss. Hosts crop profile pictures to a
+rounded square or a circle, so the file has no corner radius of its own.
+Products keep the orbit A; do not use the organisation mark as an app icon.
 
 ## 3. Colour
 
@@ -262,3 +279,8 @@ All numbers use `font-variant-numeric: tabular-nums`. Details:
    white A on a blue tile reads as Apple's App Store icon.
 2. The tile becomes slate with the gradient on the glyph; the palette and
    every token value stay as approved on 2026-10-01.
+
+## 8. Decisions (owner, 2026-11-10)
+
+1. The organisation gets its own flat mark (section 2.5), chosen over
+   orbit-based, monogram and glossy alternatives. Products keep the orbit A.

@@ -7,9 +7,9 @@ All notable changes to AnixOps Design. Versions follow
 
 ### Added
 
-- `brand/assets/social/org-avatar.svg` and `.png`: full-bleed profile picture
-  for the GitHub organisation and other accounts, glyph box 66 % of the
-  canvas.
+- Organisation mark (`brand/brand.md` 2.5): a bold A whose crossbar is a dot,
+  for the GitHub organisation and other AnixOps accounts, as
+  `brand/assets/social/org-avatar.svg` and `.png`. Products keep the orbit A.
 
 ## 1.1.0 - 2026-11-08
 
