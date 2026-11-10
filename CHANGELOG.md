@@ -3,6 +3,14 @@
 All notable changes to AnixOps Design. Versions follow
 [Semantic Versioning](https://semver.org/) on token names and asset paths.
 
+## Unreleased
+
+### Added
+
+- Organisation mark (`brand/brand.md` 2.5): a bold A whose crossbar is a dot,
+  for the GitHub organisation and other AnixOps accounts, as
+  `brand/assets/social/org-avatar.svg` and `.png`. Products keep the orbit A.
+
 ## 1.1.0 - 2026-11-08
 
 ### Changed

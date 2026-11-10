@@ -180,6 +180,16 @@ function ogImage(product) {
     + `<g transform="translate(${n((W - run.width) / 2)} ${n(top + T + GAP + CAP)})">${run.body}</g>`, defs);
 }
 
+/** The organisation mark (brand.md 2.5): a bold A whose crossbar is a dot, the O of Ops.
+ *  Full bleed, because hosts crop profile pictures to a rounded square or a circle. */
+function orgAvatar() {
+  const S = 1024, box = S * 0.7;
+  return svg(S, S, "AnixOps", `<rect width="${S}" height="${S}" fill="${C.brand["slate-900"]}"/>`
+    + `<g transform="translate(${n((S - box) / 2)} ${n((S - box) / 2)}) scale(${n(box / 24)})">`
+    + `<path d="M3.6 20.1 12 3.7 20.4 20.1" fill="none" stroke="url(#g)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`
+    + `<circle cx="12" cy="17.5" r="2.7" fill="${C.dark["label-1"]}"/></g>`, gradientDef());
+}
+
 // ------------------------------------------------------------------ SVG sources
 const SOURCES = {
   "mark.svg": () => svg(64, 64, "AnixOps", tile(0, 0, 64), gradientDef()),
@@ -200,6 +210,7 @@ const SOURCES = {
   "banner/readme-banner-light.svg": () => banner("", "light"),
   "banner/readme-banner-dark.svg": () => banner("", "dark"),
   "social/og-image.svg": () => ogImage(""),
+  "social/org-avatar.svg": () => orgAvatar(),
 };
 
 // ------------------------------------------------------------------ rasters
@@ -265,6 +276,7 @@ async function rasters(src) {
 
   // Social and README
   await add("social/og-image.png", src["social/og-image.svg"], 1200, 630);
+  await add("social/org-avatar.png", src["social/org-avatar.svg"], 1024, 1024, { flatten: C.brand["slate-900"] });
   await add("banner/readme-banner-light.png", src["banner/readme-banner-light.svg"], 2560, 640);
   await add("banner/readme-banner-dark.png", src["banner/readme-banner-dark.svg"], 2560, 640);
   return out;
@@ -304,7 +316,7 @@ const RASTERS = ["favicon/favicon.ico", "favicon/apple-touch-icon.png", "favicon
   "favicon/icon-maskable-512.png", "app-icon/app-icon-1024.png", "app-icon/app-icon-foreground-1024.png",
   "app-icon/app-icon-background-1024.png", "app-icon/app-icon-monochrome-1024.png", "tauri/32x32.png",
   "tauri/128x128.png", "tauri/128x128@2x.png", "tauri/icon.png", "tauri/icon.ico", "tauri/icon.icns",
-  "social/og-image.png", "banner/readme-banner-light.png", "banner/readme-banner-dark.png"];
+  "social/og-image.png", "social/org-avatar.png", "banner/readme-banner-light.png", "banner/readme-banner-dark.png"];
 
 if (args.check) {
   let stale = 0;
