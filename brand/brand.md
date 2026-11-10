@@ -77,6 +77,7 @@ above; never edit one by hand.
 | `assets/app-icon*.svg` | Full-bleed sources for platforms that apply their own mask (iOS, Android adaptive, PWA maskable) |
 | `assets/favicon/`, `assets/app-icon/`, `assets/tauri/` | Raster sets: ICO, PNG and ICNS sizes for web, mobile and desktop ([platforms](../guidelines/platforms.md#assets-per-platform)) |
 | `assets/social/og-image.*`, `assets/banner/readme-banner-*` | Link preview (1200 × 630) and README banner (light and dark) |
+| `assets/social/org-avatar.*` | Profile picture for the GitHub organisation and other accounts (1024 × 1024, full bleed). The host crops it to a rounded square or a circle, so the glyph box is 66 % of the canvas: large enough to read at 20 px, small enough to clear a circle |
 | [`assets/ascii-mark.txt`](assets/ascii-mark.txt) | Three-line ASCII mark for terminals ([terminal](../guidelines/terminal.md)) |
 
 The maskable and adaptive icons keep the glyph inside the central safe zone

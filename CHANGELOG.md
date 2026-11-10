@@ -3,6 +3,14 @@
 All notable changes to AnixOps Design. Versions follow
 [Semantic Versioning](https://semver.org/) on token names and asset paths.
 
+## Unreleased
+
+### Added
+
+- `brand/assets/social/org-avatar.svg` and `.png`: full-bleed profile picture
+  for the GitHub organisation and other accounts, glyph box 66 % of the
+  canvas.
+
 ## 1.1.0 - 2026-11-08
 
 ### Changed

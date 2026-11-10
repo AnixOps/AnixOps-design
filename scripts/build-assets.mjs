@@ -200,6 +200,9 @@ const SOURCES = {
   "banner/readme-banner-light.svg": () => banner("", "light"),
   "banner/readme-banner-dark.svg": () => banner("", "dark"),
   "social/og-image.svg": () => ogImage(""),
+  // Profile picture for GitHub and other hosts that crop to a rounded square or a circle:
+  // full bleed, glyph box 66 % so the orbit stays a pixel wide at 20 px and clears a circle crop.
+  "social/org-avatar.svg": () => svg(1024, 1024, "AnixOps", tile(0, 0, 1024, { rounded: false, box: 0.65625 }), gradientDef()),
 };
 
 // ------------------------------------------------------------------ rasters
@@ -265,6 +268,7 @@ async function rasters(src) {
 
   // Social and README
   await add("social/og-image.png", src["social/og-image.svg"], 1200, 630);
+  await add("social/org-avatar.png", src["social/org-avatar.svg"], 1024, 1024, { flatten: C.brand["slate-900"] });
   await add("banner/readme-banner-light.png", src["banner/readme-banner-light.svg"], 2560, 640);
   await add("banner/readme-banner-dark.png", src["banner/readme-banner-dark.svg"], 2560, 640);
   return out;
@@ -304,7 +308,7 @@ const RASTERS = ["favicon/favicon.ico", "favicon/apple-touch-icon.png", "favicon
   "favicon/icon-maskable-512.png", "app-icon/app-icon-1024.png", "app-icon/app-icon-foreground-1024.png",
   "app-icon/app-icon-background-1024.png", "app-icon/app-icon-monochrome-1024.png", "tauri/32x32.png",
   "tauri/128x128.png", "tauri/128x128@2x.png", "tauri/icon.png", "tauri/icon.ico", "tauri/icon.icns",
-  "social/og-image.png", "banner/readme-banner-light.png", "banner/readme-banner-dark.png"];
+  "social/og-image.png", "social/org-avatar.png", "banner/readme-banner-light.png", "banner/readme-banner-dark.png"];
 
 if (args.check) {
   let stale = 0;
