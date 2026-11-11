@@ -10,6 +10,11 @@ All notable changes to AnixOps Design. Versions follow
 - Organisation mark (`brand/brand.md` 2.5): a bold A whose crossbar is a dot,
   for the GitHub organisation and other AnixOps accounts, as
   `brand/assets/social/org-avatar.svg` and `.png`. Products keep the orbit A.
+- `guidelines/actions.md`: the rules every product follows for buttons and
+  their placement. Four emphasis levels (primary, secondary, quiet,
+  destructive), four scope levels (app, page, section, row), order, what a
+  row may show, destructive actions, showing only what applies, and a review
+  checklist. Rules are numbered so reviews can cite them.
 
 ## 1.1.0 - 2026-11-08
 
