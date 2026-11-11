@@ -25,6 +25,10 @@ ToDoList carry the AnixOps brand, and the product names in
    the system neutrals (`--bg`, `--label-*`, `--separator`). Slate survives
    only as the backdrop of the brand tile in marketing art
    (`--brand-slate-900/800`).
+6. Follow [actions and hierarchy](actions.md) on every screen: wrap the four
+   button levels once in the product's own components, keep a short mapping
+   document in the product repository, and run the review checklist on each
+   screen that is added or changed.
 
 ## Per product
 

@@ -10,11 +10,17 @@ All notable changes to AnixOps Design. Versions follow
 - Organisation mark (`brand/brand.md` 2.5): a bold A whose crossbar is a dot,
   for the GitHub organisation and other AnixOps accounts, as
   `brand/assets/social/org-avatar.svg` and `.png`. Products keep the orbit A.
-- `guidelines/actions.md`: the rules every product follows for buttons and
-  their placement. Four emphasis levels (primary, secondary, quiet,
-  destructive), four scope levels (app, page, section, row), order, what a
-  row may show, destructive actions, showing only what applies, and a review
-  checklist. Rules are numbered so reviews can cite them.
+- `guidelines/actions.md`: the UI/UX rules every product follows on iOS,
+  macOS, Windows, Linux and the web panels. Four emphasis levels (primary,
+  secondary, quiet, destructive) mapped to tokens and to each platform's
+  controls; scope levels (app, page, section, row, selection, dialog) and
+  where each sits; order and spacing; destructive actions with four
+  confirmation tiers (undo, confirm, typed, system); showing only what
+  applies; information hierarchy; dialogs, sheets and forms; feedback;
+  per-platform placement; worked examples; a review checklist; and how
+  products adopt and change the rules. Rules are numbered (`A`, `S`, `O`,
+  `D`, `V`, `H`, `C`, `F`, `P`) and the numbers are stable so reviews can
+  cite them.
 
 ## 1.1.0 - 2026-11-08
 

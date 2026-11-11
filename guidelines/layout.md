@@ -65,3 +65,6 @@ List (header, toolbar, table, bulk bar, side sheet) · Detail (back link,
 title and status, segmented sections, grouped lists) · Settings (left list,
 grouped rows, sticky save bar when dirty) · Dashboard (3–4 metrics, one main
 chart, alerts and activity) · Wizard (steps, form, back/next).
+
+Which actions go in the header, toolbar, bulk bar, rows and footers of these
+templates is set by [`actions.md`](actions.md).
