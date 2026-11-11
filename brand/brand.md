@@ -1,6 +1,6 @@
 # AnixOps Brand
 
-> Version 1.1.0. Palette approved by the owner on 2026-10-01; the orbit-A
+> Version 1.2.0. Palette approved by the owner on 2026-10-01; the orbit-A
 > mark approved on 2026-11-08. Products use these
 > values through tokens only, so a later change lands in one place.
 

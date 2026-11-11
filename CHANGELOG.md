@@ -3,7 +3,7 @@
 All notable changes to AnixOps Design. Versions follow
 [Semantic Versioning](https://semver.org/) on token names and asset paths.
 
-## Unreleased
+## 1.2.0 - 2026-11-11
 
 ### Added
 

@@ -10,7 +10,7 @@ AnixOps Control, AnixOps Control Center (web, mobile and TUI), AnixOps Agent
 and every other AnixOps app, CLI and site use the same mark, palette, type and
 rules.
 
-**Version 1.1.0** (2026-11-08). See [`CHANGELOG.md`](CHANGELOG.md).
+**Version 1.2.0** (2026-11-11). See [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Contents
 
