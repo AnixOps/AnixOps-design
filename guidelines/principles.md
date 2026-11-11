@@ -15,6 +15,7 @@ Apple's product pages — and only their principles.
 | **Purposeful motion** | 120–280 ms, standard easing, only for state changes; honour reduced motion |
 | **Progressive disclosure** | Simple first; advanced options behind "更多 / More" |
 | **Consistent controls** | Pill buttons, segmented controls, switches, a clear focus ring |
+| **Clear hierarchy** | One primary action per view; an action sits at the level of what it changes; different levels never share a group ([`actions.md`](actions.md)) |
 | **Settings-style admin** | Light frosted sidebar, grouped lists, details in a side sheet |
 
 ## Work first, showcase second
