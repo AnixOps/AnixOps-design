@@ -8,9 +8,16 @@ on:
 permissions:
   contents: read
 
+# A newer push to a pull request replaces the run in progress; runs on main
+# always finish.
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
