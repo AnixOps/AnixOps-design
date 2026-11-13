@@ -15,7 +15,7 @@ lawyer review it before a store listing or commercial launch.**
 Each product repository has a `TERMS.md` made of three parts, in this order:
 
 1. A header that names the product, the baseline version it follows
-   (`基准版本 2.0.0`) and links back here.
+   (`基准版本 2.0.1`) and links back here.
 2. **产品补充条款** (product supplement): who the product is for and the extra
    rules that follow from what it does. A supplement may only add or tighten;
    where it conflicts with the common terms, the stricter rule applies.
@@ -44,7 +44,6 @@ The README of the product links `TERMS.md` next to `LICENSE`.
 
 ## Open items
 
-- A public abuse-report e-mail address (section 11 says it is to be announced).
 - Governing law and court (section 13): England and Wales (decided by the
   owner on 2026-11-13, terms 2.0.0); local mandatory consumer protection is
   kept. Confirm with a lawyer.

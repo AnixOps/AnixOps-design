@@ -12,6 +12,8 @@ All notable changes to AnixOps Design. Versions follow
   adopts it as `TERMS.md` with a product supplement. Draft, not legal advice.
 - `legal/terms.zh-CN.md` 2.0.0: governing law and courts are now England
   and Wales (section 13), keeping local mandatory consumer protection.
+- `legal/terms.zh-CN.md` 2.0.1: abuse reports go to abuse@anixops.com
+  (section 11).
 
 ## 1.2.0 - 2026-11-11
 
