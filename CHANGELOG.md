@@ -10,6 +10,8 @@ All notable changes to AnixOps Design. Versions follow
 - `legal/`: baseline user agreement, acceptable use policy and disclaimer
   (`terms.zh-CN.md`, terms version 1.0.0) and how each product repository
   adopts it as `TERMS.md` with a product supplement. Draft, not legal advice.
+- `legal/terms.zh-CN.md` 2.0.0: governing law and courts are now England
+  and Wales (section 13), keeping local mandatory consumer protection.
 
 ## 1.2.0 - 2026-11-11
 
