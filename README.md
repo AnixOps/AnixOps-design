@@ -22,6 +22,7 @@ rules.
 | [`tokens/`](tokens/) | Generated per platform: `css/`, `tailwind/` (v3 preset, v4 theme), `element-plus/`, `flutter/`, `go/anixops/` (Go module), `rust/`. Do not edit by hand |
 | [`fonts/inter/`](fonts/inter/) | Self-hosted Inter (variable, Latin subset) with `@font-face` CSS; SIL OFL 1.1 |
 | [`guidelines/`](guidelines/) | Principles, colour, typography, layout, actions and hierarchy, motion, iconography, voice and tone, accessibility, naming, terminal, platforms, adoption |
+| [`legal/`](legal/) | The baseline user agreement, acceptable use policy and disclaimer (Simplified Chinese) that every product's `TERMS.md` follows |
 | [`scripts/`](scripts/) | `build-tokens.py` (tokens → every platform), `contrast.py` (WCAG table), `build-assets.mjs` (SVG and raster assets) |
 
 ## Using it in a product
