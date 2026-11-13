@@ -3,6 +3,14 @@
 All notable changes to AnixOps Design. Versions follow
 [Semantic Versioning](https://semver.org/) on token names and asset paths.
 
+## Unreleased
+
+### Added
+
+- `legal/`: baseline user agreement, acceptable use policy and disclaimer
+  (`terms.zh-CN.md`, terms version 1.0.0) and how each product repository
+  adopts it as `TERMS.md` with a product supplement. Draft, not legal advice.
+
 ## 1.2.0 - 2026-11-11
 
 ### Added
