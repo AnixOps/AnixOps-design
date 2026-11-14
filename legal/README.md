@@ -3,7 +3,8 @@
 [`terms.zh-CN.md`](terms.zh-CN.md) is the baseline user agreement shared by
 every AnixOps product: scope and definitions, how it relates to the software
 licences, the acceptable use policy (prohibited uses), MITM / certificate /
-script rules, third-party content, operator duties, the "as is" disclaimer,
+script rules (including packet capture and the
+first-time HTTPS decryption confirmation), third-party content, operator duties, the "as is" disclaimer,
 limitation of liability, abuse reporting, changes and governing law.
 
 It is written in Simplified Chinese because the products' users are; the
@@ -15,7 +16,7 @@ lawyer review it before a store listing or commercial launch.**
 Each product repository has a `TERMS.md` made of three parts, in this order:
 
 1. A header that names the product, the baseline version it follows
-   (`基准版本 2.0.1`) and links back here.
+   (`基准版本 2.1.0`) and links back here.
 2. **产品补充条款** (product supplement): who the product is for and the extra
    rules that follow from what it does. A supplement may only add or tighten;
    where it conflicts with the common terms, the stricter rule applies.

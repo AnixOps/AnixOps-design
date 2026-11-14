@@ -14,6 +14,12 @@ All notable changes to AnixOps Design. Versions follow
   and Wales (section 13), keeping local mandatory consumer protection.
 - `legal/terms.zh-CN.md` 2.0.1: abuse reports go to abuse@anixops.com
   (section 11).
+- `legal/terms.zh-CN.md` 2.1.0: section 4 now covers packet capture as well
+  as HTTPS decryption: capture and decrypt only traffic you are entitled to
+  see (your own devices, or apps, devices and networks you are authorised to
+  debug); connect other devices to capture only with their owner's consent;
+  products ask once more the first time HTTPS decryption is turned on;
+  captures stay on the device and are redacted before export.
 
 ## 1.2.0 - 2026-11-11
 
