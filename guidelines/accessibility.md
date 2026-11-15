@@ -10,6 +10,7 @@ Target: **WCAG 2.2 AA** in both themes, on desktop and phone.
 - **Keyboard**: everything reachable with Tab; `Esc` closes overlays; dialogs
   trap focus and return it; `⌘K`/`Ctrl+K` opens the command palette; `/`
   focuses search; arrow keys move within tables, menus and segmented controls.
+  The full rules and the reserved shortcuts are in [`keyboard.md`](keyboard.md).
 - **Semantics**: one H1 per page and continuous heading levels; landmarks
   (`header`, `nav`, `main`); dialogs with `role="dialog"`, `aria-modal` and
   `aria-labelledby`; form fields with a visible top label, help and error

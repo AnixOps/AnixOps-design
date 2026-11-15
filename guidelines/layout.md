@@ -25,6 +25,8 @@ Breakpoints, used literally (CSS variables cannot appear in media queries):
 
 Heights: 44 (touch, `--size-control-lg`), 36 (default), 28 (inside tables).
 Touch targets are never smaller than 44 × 44 on phones.
+Row heights, text size and padding per page type are set by
+[`density.md`](density.md).
 
 ## Radius
 

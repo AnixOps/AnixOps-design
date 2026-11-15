@@ -423,6 +423,10 @@ Before a screen ships, on every platform:
 
 ## 12. Adopting and changing these rules
 
+Three companion pages use the same numbered form and are adopted the same
+way: [`motion.md`](motion.md) (`M`), [`keyboard.md`](keyboard.md) (`K`) and
+[`density.md`](density.md) (`N`).
+
 - Each product keeps a short mapping document in its own repository: which of
   its components carries each level and scope, and any exception with its
   reason. Its agent and contributor instructions point to this page.

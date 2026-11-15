@@ -7,6 +7,18 @@ All notable changes to AnixOps Design. Versions follow
 
 ### Added
 
+- `guidelines/motion.md` rewritten as numbered rules (`M1`–`M23`): live data
+  does not animate, selection and page changes in client windows are
+  immediate, feedback timing (100 ms press, 300 ms before a busy indicator,
+  400 ms minimum), interruptible transitions, native platform mapping. The
+  motion tokens are unchanged.
+- `guidelines/keyboard.md` (`K1`–`K22`): keyboard principles, the command
+  palette, and the reserved shortcuts every product shares on macOS, Windows
+  and Linux.
+- `guidelines/density.md` (`N1`–`N24`): two density tiers chosen by
+  page type (comfortable, compact), the rules for compact tables with the
+  node table as the reference, and for comfortable pages.
+
 - `--font-app` and `--font-app-mono` (`font.family.app`, `app-mono`): system
   font stacks for installed client applications (Segoe UI Variable with
   Microsoft YaHei UI on Windows, the desktop font on Linux, the platform font
