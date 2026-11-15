@@ -8,6 +8,8 @@
 --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 ```
 
+These two are for **web products** (panel, sites, documentation).
+
 - Apple devices render their system font through `-apple-system`; nothing is
   bundled.
 - **Inter** is self-hosted from [`../fonts/inter/`](../fonts/inter/) (variable WOFF2, Latin subset only,
@@ -15,6 +17,29 @@
   platforms get a close, neutral sans.
 - **Chinese** always comes from the system: PingFang SC (Apple), Microsoft
   YaHei (Windows), Noto Sans SC (Linux, Android). No CJK web font.
+
+### Client applications
+
+Installed clients (desktop and mobile apps, whether native or in a web view)
+use the platform's own interface font and do not load Inter:
+
+```css
+--font-app: -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI Variable",
+            "Segoe UI", system-ui, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI",
+            "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", sans-serif;
+--font-app-mono: ui-monospace, "SF Mono", "Cascadia Mono", "JetBrains Mono", Menlo, Consolas,
+                 "DejaVu Sans Mono", monospace;
+```
+
+- A client is read next to the system's own applications, and its text is
+  mostly Chinese. Inter has no Chinese glyphs, so it would sit beside a
+  system Chinese font whose weight and baseline do not match; the platform
+  pairs (San Francisco with PingFang SC, Segoe UI Variable with Microsoft
+  YaHei UI, Roboto with Noto Sans) are designed together.
+- Native toolkits (SwiftUI, WinUI, GTK, Compose) already default to these
+  fonts: leave the default. A web-view client sets `--font-app` and
+  `--font-app-mono` in place of `--font-sans` and `--font-mono`.
+- Sizes, weights and the rules below are the same as on the web.
 
 ## Scale
 
