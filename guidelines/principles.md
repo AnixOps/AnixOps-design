@@ -30,7 +30,8 @@ Apple's product pages — and only their principles.
 - **Fonts.** SF Pro, SF Mono and PingFang may not be embedded or distributed
   in web pages. Reference them only through the system stack
   (`-apple-system, BlinkMacSystemFont`). Never bundle any Apple font file.
-  Inter (SIL OFL) is self-hosted for non-Apple platforms.
+  Inter (SIL OFL) is self-hosted for web products on non-Apple platforms;
+  client applications use each platform's system font.
 - **Icons.** SF Symbols are licensed only for apps on Apple platforms; never
   use them on the web or in non-Apple apps. Use Lucide (ISC).
 - **Images, logos and copy.** Never use Apple product images, logos,

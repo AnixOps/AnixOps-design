@@ -7,6 +7,11 @@ All notable changes to AnixOps Design. Versions follow
 
 ### Added
 
+- `--font-app` and `--font-app-mono` (`font.family.app`, `app-mono`): system
+  font stacks for installed client applications (Segoe UI Variable with
+  Microsoft YaHei UI on Windows, the desktop font on Linux, the platform font
+  on Apple and Android), without Inter. Web products keep `--font-sans` and
+  `--font-mono`. See `guidelines/typography.md`, "Client applications".
 - `legal/`: baseline user agreement, acceptable use policy and disclaimer
   (`terms.zh-CN.md`, terms version 1.0.0) and how each product repository
   adopts it as `TERMS.md` with a product supplement. Draft, not legal advice.
