@@ -37,6 +37,8 @@ All notable changes to AnixOps Design. Versions follow
   debug); connect other devices to capture only with their owner's consent;
   products ask once more the first time HTTPS decryption is turned on;
   captures stay on the device and are redacted before export.
+- `legal/terms.zh-CN.md` 2.1.1: the “不构成法律意见” notes at the top and at the end
+  of the terms are removed (wording only; no clause changes).
 
 ## 1.2.0 - 2026-11-11
 
