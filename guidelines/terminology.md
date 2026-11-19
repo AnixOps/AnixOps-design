@@ -35,6 +35,8 @@ the same script in CI (see "Adoption").
   ("reachable / unreachable"); a node can or cannot reach a service
   (「服务可用性」 / "service availability"). Never 「解锁」 / "unlock" for a
   service, 「突破」 / "circumvent", 「抗封锁」「抗审查」 / "anti-censorship".
+  The checker treats every 「解锁」 as the service sense: a device, screen or
+  keyring is 「打开」 or 「开启」 in Chinese copy.
 - **T5** Routing describes the rule, not the destination country's politics:
   「直连」「经代理」「按规则」. Preset modes such as 「绕过大陆」「回国」 no longer
   exist (public builds ship no presets) and are not mentioned in product copy.
