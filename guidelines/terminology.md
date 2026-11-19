@@ -40,9 +40,11 @@ the same script in CI (see "Adoption").
   exist (public builds ship no presets) and are not mentioned in product copy.
 - **T6** Review in the code sense is 「评审 / 审核 / 核查」, never 「审查」.
 - **T7** Protocol and threat-model documents describe what a classifier on the
-  path can observe and do, in the terms of T3. A third-party tool or protocol
-  keeps its own published name (for example a lab tool) only inside the
-  directory that vendors or runs it.
+  path can observe and do, in the terms of T3: 「对手」「流量分类设备」, "the
+  adversary", "an on-path classifier". A third-party tool keeps its published
+  name where it is installed, run or cited as a tool (the open-source traffic
+  classifier OpenGFW is the one such name the checker accepts); prose around
+  it still follows T3.
 - **T8** Values a product must keep reading from users' existing files (an old
   config key, an old enum value) stay in the parser and its tests, marked on
   the line with `neutral-terms: allow` and a one-line reason. They never appear
