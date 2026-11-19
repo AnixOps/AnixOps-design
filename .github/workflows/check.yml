@@ -31,6 +31,8 @@ jobs:
         with:
           go-version: "1.22"
           cache: false
+      - name: Neutral terminology
+        run: python3 scripts/neutral_terms.py
       - run: npm ci
       - run: npm run check
       - name: Go module
