@@ -13,6 +13,9 @@ separately; never machine-translate one from the other.
   「还没有节点。添加第一个节点后，用户就能使用订阅。」
 - No exclamation marks in system copy; no blame (「你输入错了」).
 
+- Describe what the software does in neutral technical terms; the word list
+  and replacements are in [terminology.md](terminology.md).
+
 ## Chinese
 
 - Full-width punctuation（，。：；？！「」）.

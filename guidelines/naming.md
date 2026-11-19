@@ -23,11 +23,16 @@ never one product.
 | SSH client (EasySSH and AnixOps-ssh, merging) | **AnixOps SSH** | SSH | `anixops-ssh` |
 | To-do app (ToDoList) | **AnixOps ToDo** | ToDo | `anixops-todo` |
 | Network tool (NetworkCore) | **AnixOps NetworkCore** | NetworkCore | `anixops-networkcore` |
+| Network debugging and proxy client (anixops-net) | **AnixOps Net** | Net | `anixops-net` |
 
 Platform variants add a suffix, not a new name: "AnixOps Control Center for
 iOS", "AnixOps Control Center (Web)". Repositories created before this guide
 keep their names; their READMEs, window titles, store listings and
 `<title>` tags use the canonical name.
+
+Product descriptions follow [terminology.md](terminology.md): say what the
+product does (「网络调试工具」, "proxy client"), never what it is used to get
+around.
 
 Products not in this table follow the same pattern when they first get a
 user-facing name; add them here in the same change.

@@ -7,6 +7,14 @@ All notable changes to AnixOps Design. Versions follow
 
 ### Added
 
+- `guidelines/terminology.md` (`T1`–`T8`): neutral terminology for every
+  product (服务商 / provider, 网络干扰, 服务可用性 and the terms they replace),
+  with the machine-readable list `guidelines/neutral-terms.json` and the
+  checker `scripts/neutral_terms.py` that product repositories copy into CI.
+  AnixOps Net added to the product table in `guidelines/naming.md`.
+- `legal/terms.zh-CN.md` 2.1.2: section 5 now says 「核查」 for checking
+  third-party content. Wording
+  only; no change to rights or obligations, no new consent needed.
 - `guidelines/motion.md` rewritten as numbered rules (`M1`–`M23`): live data
   does not animate, selection and page changes in client windows are
   immediate, feedback timing (100 ms press, 300 ms before a busy indicator,
