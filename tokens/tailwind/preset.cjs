@@ -19,6 +19,8 @@ module.exports = {
         "brand-amber": "var(--brand-amber)",
         "brand-slate-900": "var(--brand-slate-900)",
         "brand-slate-800": "var(--brand-slate-800)",
+        "brand-line-tools-start": "var(--brand-line-tools-start)",
+        "brand-line-tools-end": "var(--brand-line-tools-end)",
         bg: "var(--bg)",
         "bg-elevated": "var(--bg-elevated)",
         "bg-grouped": "var(--bg-grouped)",

@@ -35,6 +35,8 @@
   --color-brand-amber: var(--brand-amber);
   --color-brand-slate-900: var(--brand-slate-900);
   --color-brand-slate-800: var(--brand-slate-800);
+  --color-brand-line-tools-start: var(--brand-line-tools-start);
+  --color-brand-line-tools-end: var(--brand-line-tools-end);
   --color-bg: var(--bg);
   --color-bg-elevated: var(--bg-elevated);
   --color-bg-grouped: var(--bg-grouped);

@@ -50,12 +50,14 @@ var (
 
 // Brand colours (theme independent).
 const (
-	BrandGradientStart = "#0EA5E9"
-	BrandGradientEnd   = "#6366F1"
-	BrandPurple        = "#8B5CF6"
-	BrandAmber         = "#F59E0B"
-	BrandSlate900      = "#0F172A"
-	BrandSlate800      = "#1E293B"
+	BrandGradientStart  = "#0EA5E9"
+	BrandGradientEnd    = "#6366F1"
+	BrandPurple         = "#8B5CF6"
+	BrandAmber          = "#F59E0B"
+	BrandSlate900       = "#0F172A"
+	BrandSlate800       = "#1E293B"
+	BrandLineToolsStart = "#0D9488"
+	BrandLineToolsEnd   = "#16A34A"
 )
 
 // Terminal palette for CLIs and TUIs.
