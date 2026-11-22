@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Version theme generator: a fixed motif per product, varied by the release's own git history.
 
-No randomness: the same release range always gives the same piece. See brand/brand.md section 2.7.
+The data sets the skeleton (mode, tempo, densities, form); the release commit hash picks only the details that
+carry no meaning (progression, rhythm offsets, arpeggio order, voicing), so every major sounds different.
+No randomness: the same release always gives the same piece. See brand/brand.md section 2.7.
 
 Usage: theme.py --repo PATH --from TAG|root --to TAG --product control --samples VSCO_DIR [--out DIR]
 Writes <product>-<to>.mp3 (needs ffmpeg), .mid and .json (the statistics and the derived parameters).
 """
-import argparse, json, math, re, subprocess, tempfile, wave
+import argparse, hashlib, itertools, json, math, re, subprocess, tempfile, wave
 from pathlib import Path
 import numpy as np
 from sampler import Sampler
@@ -30,6 +32,10 @@ BPM = {'server': 86, 'client': 104, 'showcase': 126}
 MODES = [('aeolian', [0, 2, 3, 5, 7, 8, 10]), ('dorian', [0, 2, 3, 5, 7, 9, 10]),
          ('mixolydian', [0, 2, 4, 5, 7, 9, 10]), ('ionian', [0, 2, 4, 5, 7, 9, 11]),
          ('lydian', [0, 2, 4, 6, 7, 9, 11])]
+# Details picked by the release commit hash
+PROGRESSIONS = [[0, 5, 3, 4], [0, 3, 5, 4], [0, 5, 1, 4], [0, 2, 5, 3], [0, 4, 5, 3], [5, 3, 0, 4], [0, 3, 1, 4], [3, 4, 2, 5]]
+VOICINGS = [(2, 4, 6, 8), (4, 6, 8, 9), (2, 6, 8, 11)]  # chord tones above the root, in degrees; the root is the bass's
+ARP_ORDERS = list(itertools.permutations((0, 4, 6, 8)))
 NOTE_NAMES = 'C C# D D# E F F# G G# A A# B'.split()
 GROUPS = {'backend': {'go', 'rs', 'py', 'c', 'h', 'sql'}, 'frontend': {'vue', 'js', 'ts', 'tsx', 'css', 'dart', 'html'},
           'config': {'json', 'yaml', 'yml', 'toml', 'nft', 'sh', 'conf'}}
@@ -55,20 +61,22 @@ def stats(repo, a, b):
         ext = f.rsplit('.', 1)[-1].lower() if '.' in f else ''
         lang[next((g for g, s in GROUPS.items() if ext in s), 'other')] += int(x) + int(y)
     t0, t1 = (int(git(repo, 'log', '-1', '--format=%ct', t)) for t in (a, b))
+    commit = git(repo, 'rev-list', '-n1', b).strip()
     tot = sum(lang.values()) or 1
-    return {'from': a, 'to': b, 'commits': len(subjects), 'insertions': ins, 'deletions': dele,
+    return {'from': a, 'to': b, 'commit': commit, 'commits': len(subjects), 'insertions': ins, 'deletions': dele,
             'days': max(1, round((t1 - t0) / 86400)), 'types': types,
             'lang': {k: round(v / tot, 3) for k, v in lang.items()}}
 
 
-def euclid(k, n=16):
-    """k hits spread as evenly as possible over n steps."""
-    return [(i * k) % n < k for i in range(n)]
+def euclid(k, rot=0, n=16):
+    """k hits spread as evenly as possible over n steps, rotated by rot."""
+    return [((i + rot) * k) % n < k for i in range(n)]
 
 
-def compose(st, product, major):
+def compose(st, product, major_key):
     grow = st['insertions'] / max(1, st['insertions'] + st['deletions'])
     mode_name, scale = MODES[min(4, int(grow * 5))]
+    major = major_key[-1]
     tonic = 50 + (major * 7) % 12 - (12 if (major * 7) % 12 > 6 else 0)  # each major moves one step round the circle of fifths
     T, L, n = st['types'], st['lang'], max(1, st['commits'])
     feat, fix = T.get('feat', 0), T.get('fix', 0)
@@ -79,6 +87,9 @@ def compose(st, product, major):
     hat = min(12, 4 + round(fix / n * 24))                            # share of fix → hi-hat
     bass_hits = 3 + round(L['config'] * 10)                           # config and ops share → bass groove
     invert = tidy > feat * 0.35                                       # tidy-up release → A' inverted, else reversed
+    h = hashlib.sha256(st['commit'].encode()).digest()
+    prog, voicing = PROGRESSIONS[h[0] % 8], VOICINGS[h[1] % 3]
+    arp_rot, hat_rot, arp_order = h[2] % 16, h[3] % 16, ARP_ORDERS[h[4] % 24]
 
     def pitch(deg, octave=0):
         o, d = divmod(deg, 7)
@@ -93,7 +104,6 @@ def compose(st, product, major):
     mirror = [(-d + 4, ln) for d, ln in motif] if invert else motif[::-1]
     coda = [(d, ln * 2) for d, ln in motif[:3]] + [(0, 16)]
 
-    prog = [0, 5, 3, 4]  # chord roots as degrees, so the progression takes the colour of the mode
     full = {'pad', 'arp', 'bass', 'drums'}
     # The motif starts on beat one; drums enter in B, drop out in A', return, and the coda is strings only.
     sections = [('A', motif, {'pad', 'arp'}), ('B', var, full), ('A2', mirror, {'pad', 'bass'}),
@@ -114,25 +124,26 @@ def compose(st, product, major):
         for b in range(bars):
             root = prog[(b + (name == 'B') * 2) % 4]
             s = t + b * 16
-            for k in (2, 4, 6, 8):  # 3rd, 5th, 7th, 9th: seventh and ninth chords, the root is the bass's
+            for k in voicing:  # seventh and ninth chords as degrees, so the progression takes the colour of the mode
                 notes['pad'].append((s, 16, pitch(root + k), 48))
             if 'arp' in parts:
-                for i, on in enumerate(euclid(arp_hits)):
-                    if on: put('arp', s + i, 1, pitch(root + (0, 4, 6, 8)[i % 4], 1), 64 - 12 * (i % 2))
+                for i, on in enumerate(euclid(arp_hits, arp_rot)):
+                    if on: put('arp', s + i, 1, pitch(root + arp_order[i % 4], 1), 64 - 12 * (i % 2))
             if 'bass' in parts:
                 for i, on in enumerate(euclid(bass_hits)):
                     if on: put('bass', s + i, 2, pitch(root, -1), 92 - 10 * (i % 4 != 0))
             if 'drums' in parts:
                 for i in range(16):
                     if euclid(kick)[i]: put('drums', s + i, 1, 36, 110)
-                    if euclid(hat)[i]: put('drums', s + i, 1, 42, 70 + 20 * (i % 4 == 0))
+                    if euclid(hat, hat_rot)[i]: put('drums', s + i, 1, 42, 70 + 20 * (i % 4 == 0))
                     if i in (4, 12): put('drums', s + i, 1, 39, 80)
                 if b == 0: notes['drums'].append((s, 1, 49, 100))  # a cymbal where the drums come in
         t += bars * 16
     meta = {'product': product, 'key': f'{NOTE_NAMES[tonic % 12]} {mode_name}', 'tier': TIER[product],
             'bpm': BPM[TIER[product]], 'growth_ratio': round(grow, 3), 'arp_hits': arp_hits, 'ornaments': ornaments,
-            'kick_hits': kick, 'hat_hits': hat, 'bass_hits': bass_hits,
-            'A2': 'inversion' if invert else 'retrograde', 'bars': t // 16, 'stats': st}
+            'kick_hits': kick, 'hat_hits': hat, 'bass_hits': bass_hits, 'A2': 'inversion' if invert else 'retrograde',
+            'progression': prog, 'voicing': voicing, 'arp_rotation': arp_rot, 'hat_rotation': hat_rot,
+            'arp_order': arp_order, 'major': major_key, 'bars': t // 16, 'stats': st}
     return notes, meta
 
 
@@ -229,10 +240,10 @@ def main():
     ap.add_argument('--to', dest='b', required=True); ap.add_argument('--product', choices=MOTIFS, required=True)
     ap.add_argument('--samples', required=True, help='VSCO-2-CE checkout'); ap.add_argument('--out', default='.')
     o = ap.parse_args()
-    nums = re.findall(r'\d+', o.b)
-    major = int(nums[0]) or int(nums[1])  # 0.x products use the minor version
+    nums = [int(x) for x in re.findall(r'\d+', o.b)[:2]]
+    major_key = nums[:1] if nums[0] else nums  # 0.x products use the minor version
     if o.a == 'root': o.a = git(o.repo, 'rev-list', '--max-parents=0', o.b).split()[-1]
-    notes, meta = compose(stats(o.repo, o.a, o.b), o.product, major)
+    notes, meta = compose(stats(o.repo, o.a, o.b), o.product, major_key)
     stem = Path(o.out) / f'{o.product}-{o.b}'
     stem.parent.mkdir(parents=True, exist_ok=True)
     write_midi(notes, meta['bpm'], f'{stem}.mid')

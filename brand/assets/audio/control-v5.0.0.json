@@ -10,10 +10,34 @@
   "hat_hits": 7,
   "bass_hits": 5,
   "A2": "inversion",
+  "progression": [
+    0,
+    2,
+    5,
+    3
+  ],
+  "voicing": [
+    2,
+    6,
+    8,
+    11
+  ],
+  "arp_rotation": 6,
+  "hat_rotation": 2,
+  "arp_order": [
+    4,
+    0,
+    8,
+    6
+  ],
+  "major": [
+    5
+  ],
   "bars": 11,
   "stats": {
     "from": "v4.2.1",
     "to": "v5.0.0",
+    "commit": "888e2ae514230316dbc555793bd04cab76fbfebf",
     "commits": 202,
     "insertions": 137014,
     "deletions": 331853,

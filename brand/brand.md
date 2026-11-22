@@ -173,7 +173,13 @@ background music on the website (muted until the visitor presses play).
 It is generated from the release itself, so it is never random and never
 picked by taste alone.
 
-**The motif names the product; the release data shapes the variation.**
+**The motif names the product; the release data shapes the variation; the
+release commit hash makes it unique.** The hash of the release tag's commit
+picks only details that carry no meaning: the chord progression (one of 8),
+the rhythm offsets of arpeggio and hi-hat (16 each), the arpeggio order (24)
+and the chord voicing (3). Two majors of a product therefore never share a
+theme, and CI (`scripts/theme/update.py --check`) fails if two themes ever
+share every audible parameter.
 
 | Fixed per product | Taken from the release (`<previous major>..<new major>` in git) |
 |---|---|
@@ -194,6 +200,11 @@ python3 scripts/theme/theme.py --repo ../anix-control --from v4.2.1 --to v5.0.0 
 
 Each theme is `assets/audio/<product>-<version>.mp3` with the `.mid` score
 and a `.json` that records the statistics and every derived parameter.
+
+New majors are picked up by `.github/workflows/themes.yml` (weekly and on
+demand): for every product major release newer than its latest theme it
+generates one and opens a pull request to listen to before merging. It reads
+the private product repositories with the secret `THEME_REPO_TOKEN`.
 
 ## 3. Colour
 
@@ -364,6 +375,8 @@ All numbers use `font-variant-numeric: tabular-nums`. Details:
    line on teal to green.
 3. Each major release gets a generated theme (section 2.7): a fixed motif
    per product varied by the release's git history, chosen over a hash of
-   the release (random, says nothing about the product). Tempo is fixed by
-   product tier, not by commit rate. Sampled instruments chosen over pure
-   synthesis.
+   the release alone (random, says nothing about the product). The commit
+   hash only picks meaningless details, so every major is unique. Tempo is
+   fixed by product tier, not by commit rate. Sampled instruments chosen
+   over pure synthesis. The themes are brand assets (`LICENSE-BRAND.md`),
+   not CC0; the CC0 samples put no conditions on them.

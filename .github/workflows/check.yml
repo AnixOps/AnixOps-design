@@ -33,6 +33,8 @@ jobs:
           cache: false
       - name: Neutral terminology
         run: python3 scripts/neutral_terms.py
+      - name: Version themes are distinct
+        run: python3 scripts/theme/update.py --check
       - run: npm ci
       - run: npm run check
       - name: Go module

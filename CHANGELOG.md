@@ -13,6 +13,8 @@ All notable changes to AnixOps Design. Versions follow
   sampler and mixer; samples from VSCO 2 CE, CC0, not stored). First set in
   `brand/assets/audio/`: Control 5.0.0, Agent 5.0.0, Core 0.2.0,
   Net 0.3.0-beta.10, SSH 2.4.0.
+  `.github/workflows/themes.yml` generates themes for new majors and opens
+  a pull request; CI checks that no two themes are identical.
 - Product icons (`brand/brand.md` 2.6): one icon per product, AnixOps
   Control, Core, Agent, Net and SSH, under `brand/assets/products/<id>/`
   (rounded and full-bleed SVG, PNG 16–1024, ICO, ICNS). The symbol names the
