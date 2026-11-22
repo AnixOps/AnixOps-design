@@ -1,16 +1,16 @@
 name: themes
 
 # Generates a version theme (brand/brand.md 2.7) for every product major release that has none yet and
-# opens a pull request with it. Needs the secret THEME_REPO_TOKEN: a fine-grained token with read-only
-# "Contents" on the private product repositories (anix-control, anix-agent).
+# opens a pull request with it. Needs the secret THEME_REPO_TOKEN, a fine-grained token with read-only
+# "Contents" on the product repositories (anix-control, anix-agent) and "Contents" + "Pull requests" read and
+# write on AnixOps-design. Pushing with it (not GITHUB_TOKEN) also makes CI run on the pull request.
 on:
   schedule:
     - cron: "17 3 * * 1"
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: themes
@@ -21,6 +21,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.THEME_REPO_TOKEN }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -37,7 +39,7 @@ jobs:
         run: python3 scripts/theme/update.py --work "$RUNNER_TEMP/products" --samples "$RUNNER_TEMP/vsco"
       - name: Open a pull request
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.THEME_REPO_TOKEN }}
         run: |
           git add brand/assets/audio
           git diff --cached --quiet && exit 0

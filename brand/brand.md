@@ -204,7 +204,8 @@ and a `.json` that records the statistics and every derived parameter.
 New majors are picked up by `.github/workflows/themes.yml` (weekly and on
 demand): for every product major release newer than its latest theme it
 generates one and opens a pull request to listen to before merging. It reads
-the private product repositories with the secret `THEME_REPO_TOKEN`.
+the private product repositories and opens the pull request with the secret
+`THEME_REPO_TOKEN`.
 
 ## 3. Colour
 
