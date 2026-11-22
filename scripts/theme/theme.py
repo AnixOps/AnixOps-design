@@ -81,12 +81,12 @@ def compose(st, product, major_key):
     T, L, n = st['types'], st['lang'], max(1, st['commits'])
     feat, fix = T.get('feat', 0), T.get('fix', 0)
     tidy = T.get('refactor', 0) + T.get('chore', 0) + T.get('test', 0)
-    arp_hits = min(12, 4 + round(st['commits'] / st['days'] * 0.8))  # commits per day → arpeggio density
-    ornaments = min(6, round(feat / n * 10))                          # share of feat → ornaments in B
+    arp_hits = min(12, 4 + round(st['commits'] / st['days'] * 0.8))  # commits per day → harp density
+    ornaments = min(6, round(feat / n * 10))                          # share of feat → ornaments in the variation
     kick = 2 + round(L['backend'] * 4)                                # backend share → kick
     hat = min(12, 4 + round(fix / n * 24))                            # share of fix → hi-hat
     bass_hits = 3 + round(L['config'] * 10)                           # config and ops share → bass groove
-    invert = tidy > feat * 0.35                                       # tidy-up release → A' inverted, else reversed
+    invert = tidy > feat * 0.35                                       # tidy-up release → development inverted, else reversed
     h = hashlib.sha256(st['commit'].encode()).digest()
     prog, voicing = PROGRESSIONS[h[0] % 8], VOICINGS[h[1] % 3]
     arp_rot, hat_rot, arp_order = h[2] % 16, h[3] % 16, ARP_ORDERS[h[4] % 24]
@@ -95,53 +95,76 @@ def compose(st, product, major_key):
         o, d = divmod(deg, 7)
         return tonic + 12 * (o + octave) + scale[d]
 
+    # Melodic material, in (degree, 16ths). A period = antecedent (the motif) + consequent (the motif closing on the tonic).
     motif = MOTIFS[product]
-    var = []  # B: upper neighbour notes on the longest notes, then the whole line a third higher
+    period = motif + motif[:-1] + [(0, motif[-1][1])]
     longest = sorted(range(len(motif)), key=lambda i: -motif[i][1])[:ornaments]
-    for i, (d, ln) in enumerate(motif):
-        var += [(d + 1, 2), (d, ln - 2)] if i in longest and ln >= 4 else [(d, ln)]
-    var = [(d + 2, ln) for d, ln in var]
+    varied = [x for i, (d, ln) in enumerate(motif) for x in ([(d + 1, 2), (d, ln - 2)] if i in longest and ln >= 4 else [(d, ln)])]
     mirror = [(-d + 4, ln) for d, ln in motif] if invert else motif[::-1]
-    coda = [(d, ln * 2) for d, ln in motif[:3]] + [(0, 16)]
+    half = []  # first bar of the motif, the fragment the development is built from
+    for d, ln in motif:
+        if sum(x for _, x in half) >= 16: break
+        half.append((d, min(ln, 16 - sum(x for _, x in half))))
+    development = mirror + [(d + 2, ln) for d, ln in mirror] + half + [(d - 1, ln) for d, ln in half] + half + [(d - 2, ln) for d, ln in half]
+    coda = [(d, ln * 2) for d, ln in half] + [(0, 32)]
 
-    full = {'pad', 'arp', 'bass', 'drums'}
-    # The motif starts on beat one; drums enter in B, drop out in A', return, and the coda is strings only.
-    sections = [('A', motif, {'pad', 'arp'}), ('B', var, full), ('A2', mirror, {'pad', 'bass'}),
-                ('A', motif, full), ('coda', coda, {'pad'})]
-    notes = {k: [] for k in ('lead', 'arp', 'pad', 'bass', 'drums')}  # (start16, len16, midi, velocity)
+    # Form (bars): one arc that builds to a climax at about two thirds and settles, then loops.
+    # name, bars, melody, level, layers
+    sections = [
+        ('intro', 4, period, 0.70, {'pad'}),
+        ('A', 8, period + varied + motif[:-1] + [(0, motif[-1][1])], 0.80, {'pad', 'ostinato', 'bass', 'arp'}),
+        ('B', 8, development, 0.88, {'pad', 'ostinato', 'bass', 'arp', 'counter', 'drums'}),
+        ('build', 2, [(4, 32)], 0.95, {'pad', 'ostinato', 'bass', 'arp', 'counter', 'roll'}),
+        ('climax', 8, period + period, 1.00, {'pad', 'ostinato', 'bass', 'arp', 'double', 'drums'}),
+        ('outro', 4, coda, 0.65, {'pad', 'arp'}),
+    ]
+    notes = {k: [] for k in ('lead', 'counter', 'ostinato', 'arp', 'pad', 'bass', 'drums')}  # (start16, len16, midi, velocity)
 
     def put(track, s, ln, m, v):  # deterministic feel: off-beat swing, small timing and velocity drift
         i = len(notes[track])
         s += 0.12 * (s % 2 == 1) + 0.04 * math.sin(i * 2.399)
         notes[track].append((s, ln, m, max(1, min(127, round(v * (1 + 0.08 * math.sin(i * 1.618)))))))
 
-    t = 0
-    for name, mel, parts in sections:
-        bars = max(2, math.ceil(sum(ln for _, ln in mel) / 16))
+    t, prev = 0, pitch(4, 1)
+    for name, bars, mel, lv, parts in sections:
         p = t
         for d, ln in mel:
-            put('lead', p, ln, pitch(d, 1), 100 if p % 16 == 0 else 86 if p % 4 == 0 else 76); p += ln
+            put('lead', p, ln, pitch(d, 1), lv * (100 if p % 16 == 0 else 86 if p % 4 == 0 else 76))
+            if 'double' in parts: put('counter', p, ln, pitch(d, 2), lv * 70)  # violins double the motif an octave up
+            p += ln
         for b in range(bars):
-            root = prog[(b + (name == 'B') * 2) % 4]
             s = t + b * 16
+            root = 4 if name == 'build' else prog[(b + (name == 'B') * 2) % 4]
+            ramp = lv * (0.6 + 0.4 * b / max(1, bars - 1)) if name in ('intro', 'build') else lv
             for k in voicing:  # seventh and ninth chords as degrees, so the progression takes the colour of the mode
-                notes['pad'].append((s, 16, pitch(root + k), 48))
+                notes['pad'].append((s, 16, pitch(root + k), round(48 * ramp)))
+            if 'counter' in parts and 'double' not in parts:  # counter-melody: two chord tones a bar, nearest move
+                for half_bar in (0, 8):
+                    prev = min((pitch(root + k, 1) for k in (2, 4, 6) if pitch(root + k, 1) != prev), key=lambda m: abs(m - prev))
+                    put('counter', s + half_bar, 8, prev, 60 * ramp)
+            if 'ostinato' in parts:  # low strings drive in eighths, sixteenths in the build
+                step = 1 if name == 'build' else 2
+                for i in range(0, 16, step):
+                    put('ostinato', s + i, step, pitch(root + (0, 4, 7, 4)[i // step % 4], 0), (72 - 12 * (i % 4 != 0)) * ramp)
             if 'arp' in parts:
                 for i, on in enumerate(euclid(arp_hits, arp_rot)):
-                    if on: put('arp', s + i, 1, pitch(root + arp_order[i % 4], 1), 64 - 12 * (i % 2))
+                    if on: put('arp', s + i, 1, pitch(root + arp_order[i % 4], 2 if name == 'climax' else 1), (64 - 12 * (i % 2)) * lv)
             if 'bass' in parts:
                 for i, on in enumerate(euclid(bass_hits)):
-                    if on: put('bass', s + i, 2, pitch(root, -1), 92 - 10 * (i % 4 != 0))
+                    if on: put('bass', s + i, 2, pitch(root + (4 if i == 8 and name == 'climax' else 0), -1), (92 - 10 * (i % 4 != 0)) * lv)
             if 'drums' in parts:
                 for i in range(16):
-                    if euclid(kick)[i]: put('drums', s + i, 1, 36, 110)
-                    if euclid(hat, hat_rot)[i]: put('drums', s + i, 1, 42, 70 + 20 * (i % 4 == 0))
-                    if i in (4, 12): put('drums', s + i, 1, 39, 80)
-                if b == 0: notes['drums'].append((s, 1, 49, 100))  # a cymbal where the drums come in
+                    if euclid(kick)[i]: put('drums', s + i, 1, 36, 110 * lv)
+                    if euclid(hat, hat_rot)[i]: put('drums', s + i, 1, 42, (70 + 20 * (i % 4 == 0)) * lv)
+                    if i in (4, 12): put('drums', s + i, 1, 39, 80 * lv)
+            if 'roll' in parts:  # snare roll into the climax
+                for i in range(0, 16, 2 - b):
+                    put('drums', s + i, 1, 39, 60 + 60 * (b * 16 + i) / 32)
+        if name in ('B', 'climax'): notes['drums'].append((t, 1, 49, 100))  # a cymbal where the drums come in
         t += bars * 16
     meta = {'product': product, 'key': f'{NOTE_NAMES[tonic % 12]} {mode_name}', 'tier': TIER[product],
             'bpm': BPM[TIER[product]], 'growth_ratio': round(grow, 3), 'arp_hits': arp_hits, 'ornaments': ornaments,
-            'kick_hits': kick, 'hat_hits': hat, 'bass_hits': bass_hits, 'A2': 'inversion' if invert else 'retrograde',
+            'kick_hits': kick, 'hat_hits': hat, 'bass_hits': bass_hits, 'development': 'inversion' if invert else 'retrograde',
             'progression': prog, 'voicing': voicing, 'arp_rotation': arp_rot, 'hat_rotation': hat_rot,
             'arp_order': arp_order, 'major': major_key, 'bars': t // 16, 'stats': st}
     return notes, meta
@@ -162,8 +185,9 @@ def write_midi(notes, bpm, path):
 
     us = round(60_000_000 / bpm)
     tracks = [track([(0, [0xFF, 0x51, 3, *us.to_bytes(3, 'big')])])]
-    # General MIDI: piano, harp, string ensemble, contrabass, drums
-    for ch, (name, prog) in enumerate([('lead', 0), ('arp', 46), ('pad', 48), ('bass', 43), ('drums', None)]):
+    # General MIDI: piano, violin, cello, harp, string ensemble, contrabass, drums
+    for ch, (name, prog) in enumerate([('lead', 0), ('counter', 40), ('ostinato', 42), ('arp', 46), ('pad', 48),
+                                       ('bass', 43), ('drums', None)]):
         ch = 9 if name == 'drums' else ch
         ev = [] if prog is None else [(0, [0xC0 | ch, prog])]
         for s, ln, m, v in notes[name]:
@@ -195,18 +219,19 @@ def render(notes, meta, smp):
     def noise(k, seed):  # deterministic noise
         return np.sin(np.arange(k) * 12.9898 + seed) * 43758.5453 % 1 * 2 - 1
 
-    for j, (s, ln, m, v) in enumerate(notes['lead']):
-        k = int((ln * step + 0.8) * SR)
-        add(dry, s, smp('lead', m, k) * env(k, 1, int(0.4 * SR)), 0.42 * v / 127, 0.1 * math.sin(j * 0.7), d=0.15, r=0.4)
-    for j, (s, ln, m, v) in enumerate(notes['arp']):
-        k = int(1.5 * SR)
-        add(pump, s, smp('arp', m, k) * env(k, 1, int(0.6 * SR)), 0.13 * v / 127, 0.4 if j % 2 else -0.4, d=0.3, r=0.4)
-    for s, ln, m, v in notes['pad']:
-        k = int((ln * step + 1.2) * SR)
-        add(pump, s, smp('pad', m, k) * env(k, int(0.4 * SR), int(1.2 * SR)), 0.14 * v / 127, (m % 5 - 2) * 0.25, r=0.45)
-    for s, ln, m, v in notes['bass']:
-        k = int((ln * step + 0.6) * SR)
-        add(pump, s, smp('bass', m, k) * env(k, 1, int(0.3 * SR)), 0.42 * v / 127, r=0.1)
+    # track: bus, gain, sound length (s, from note length), attack (s), release (s), pan(j, m), delay send, reverb send
+    voices = {
+        'lead': (dry, 0.42, lambda ln: ln * step + 0.8, 0, 0.4, lambda j, m: 0.1 * math.sin(j * 0.7), 0.15, 0.4),
+        'counter': (pump, 0.34, lambda ln: ln * step + 0.6, 0.12, 0.6, lambda j, m: 0.35, 0, 0.5),
+        'ostinato': (pump, 0.26, lambda ln: ln * step + 0.15, 0, 0.1, lambda j, m: -0.3, 0, 0.25),
+        'arp': (pump, 0.13, lambda ln: 1.5, 0, 0.6, lambda j, m: 0.4 if j % 2 else -0.4, 0.3, 0.4),
+        'pad': (pump, 0.14, lambda ln: ln * step + 1.2, 0.4, 1.2, lambda j, m: (m % 5 - 2) * 0.25, 0, 0.45),
+        'bass': (pump, 0.32, lambda ln: ln * step + 0.6, 0, 0.3, lambda j, m: 0, 0, 0.1),
+    }
+    for track, (bus, gain, length, att, rel, pan, d, r) in voices.items():
+        for j, (s, ln, m, v) in enumerate(notes[track]):
+            k = int(length(ln) * SR)
+            add(bus, s, smp(track, m, k) * env(k, max(1, int(att * SR)), int(rel * SR)), gain * v / 127, pan(j, m), d, r)
     sc = np.ones(total)  # kick sidechain: strings, harp and bass breathe with the kick
     for j, (s, ln, m, v) in enumerate(notes['drums']):
         k = int((2.0 if m == 49 else 0.5) * SR); t = np.arange(k) / SR; nz = noise(k, m + j % 7)

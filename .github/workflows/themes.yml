@@ -32,7 +32,7 @@ jobs:
           git clone -q --depth 1 --filter=blob:none --sparse https://github.com/sgossner/VSCO-2-CE "$RUNNER_TEMP/vsco"
           git -C "$RUNNER_TEMP/vsco" sparse-checkout set "Keys/Upright Piano" "Strings/Harp" \
             "Strings/Violin Section/susVib" "Strings/Viola Section/susvib" "Strings/Cello Section/susvib" \
-            "Strings/Solo Contrabass/Pizz"
+            "Strings/Solo Contrabass/Pizz" "Strings/Cello Section/spic" "Strings/Viola Section/spic"
       - name: Generate missing themes
         env:
           THEME_REPO_TOKEN: ${{ secrets.THEME_REPO_TOKEN }}

@@ -185,8 +185,8 @@ share every audible parameter.
 |---|---|
 | A two-bar motif in scale degrees: Control rises a fifth and settles, Agent pulses, Core loops an arpeggio, Net leaps, SSH taps | Key: the major version moves one step round the circle of fifths (0.x products use the minor) |
 | Tempo by tier: server side (Control, Core, Agent) 86 BPM, client (Net) 104, UI showcase (SSH) 126 | Mode, dark to bright: insertions / (insertions + deletions), Aeolian → Dorian → Mixolydian → Ionian → Lydian |
-| Form: A, B (variation), A' (mirror), A, coda; ends on the tonic, so it loops | Arpeggio density: commits per day. Ornaments in B: share of `feat`. Hi-hat: share of `fix`. A' inverted or reversed: `refactor`/`chore`/`test` against `feat` |
-| Sound: sampled upright piano (motif), harp, string section, plucked double bass; synthesised drums | Kick: backend code share. Bass groove: config and ops share |
+| Form, 34 bars, one arc: intro (piano states the period) 4, A 8, development 8, build 2, climax 8 (violins double the motif an octave up), outro 4; ends on the tonic, so it loops | Arpeggio density: commits per day. Ornaments in B: share of `feat`. Hi-hat: share of `fix`. development inverted or reversed: `refactor`/`chore`/`test` against `feat` |
+| Sound: sampled upright piano (motif), violin counter-melody, cello and viola spiccato ostinato, harp, string section, plucked double bass; synthesised drums | Kick: backend code share. Bass groove: config and ops share |
 
 Generate one with `scripts/theme/theme.py` (Python 3, numpy, ffmpeg). The
 instrument samples are VSCO 2 Community Edition (CC0), fetched separately,

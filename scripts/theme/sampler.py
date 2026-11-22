@@ -14,6 +14,8 @@ SETS = {
     'pad': [('Strings/Cello Section/susvib/*_v1_1.wav', 2), ('Strings/Viola Section/susvib/*_v1_1.wav', 2),
             ('Strings/Violin Section/susVib/*_v1.wav', 2)],
     'bass': [('Strings/Solo Contrabass/Pizz/*_v1_rr1.wav', 2)],
+    'ostinato': [('Strings/Cello Section/spic/*_v2_RR1.wav', 2), ('Strings/Viola Section/spic/*_v2_rr1.wav', 2)],
+    'counter': [('Strings/Viola Section/susvib/*_v1_1.wav', 2), ('Strings/Violin Section/susVib/*_v1.wav', 2)],
 }
 
 

@@ -9,7 +9,7 @@
   "kick_hits": 4,
   "hat_hits": 4,
   "bass_hits": 4,
-  "A2": "retrograde",
+  "development": "retrograde",
   "progression": [
     3,
     4,
@@ -33,7 +33,7 @@
   "major": [
     2
   ],
-  "bars": 10,
+  "bars": 34,
   "stats": {
     "from": "v2.3.2",
     "to": "v2.4.0",

@@ -9,7 +9,7 @@
   "kick_hits": 5,
   "hat_hits": 9,
   "bass_hits": 4,
-  "A2": "inversion",
+  "development": "inversion",
   "progression": [
     0,
     5,
@@ -34,7 +34,7 @@
     0,
     2
   ],
-  "bars": 10,
+  "bars": 34,
   "stats": {
     "from": "v0.1.0",
     "to": "v0.2.0",
