@@ -224,16 +224,25 @@ const LINES = {
 
 /** 1024 px product icon. rounded: tile radius as the mark; otherwise full bleed for platforms
  *  that mask the icon themselves. Glyph box 70 % of the side. The tile gradient is repeated in
- *  the glyph's own space so cut-outs match the tile exactly. */
-function productIcon(id, { rounded = true } = {}) {
-  const S = 1024, box = S * 0.7, o = (S - box) / 2, k = box / 24;
+ *  the glyph's own space so cut-outs match the tile exactly.
+ *  layer (Android adaptive icons, glyph box 50 % so it stays in the safe zone):
+ *  "fg" glyph only, "bg" tile only, "mono" one-colour glyph with the cut-outs transparent. */
+function productIcon(id, { rounded = true, layer = "" } = {}) {
+  const S = 1024, box = S * (layer ? 0.5 : 0.7), o = (S - box) / 2, k = box / 24;
   const [a, b] = LINES[PRODUCTS[id].line];
   const stops = `<stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/>`;
   const defs = `<linearGradient id="t" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${S}" y2="${S}">${stops}</linearGradient>`
     + `<linearGradient id="h" gradientUnits="userSpaceOnUse" x1="${n(-o / k)}" y1="${n(-o / k)}" x2="${n((S - o) / k)}" y2="${n((S - o) / k)}">${stops}</linearGradient>`;
-  return svg(S, S, PRODUCTS[id].name,
-    `<rect width="${S}" height="${S}"${rounded ? ` rx="${n(S * 0.21875)}"` : ""} fill="url(#t)"/>`
-    + `<g transform="translate(${n(o)} ${n(o)}) scale(${n(k)})">${PRODUCT_GLYPHS[id]("#FFFFFF", C.brand["slate-900"], "url(#h)")}</g>`, defs);
+  const place = (body) => `<g transform="translate(${n(o)} ${n(o)}) scale(${n(k)})">${body}</g>`;
+  const tileRect = `<rect width="${S}" height="${S}"${rounded && !layer ? ` rx="${n(S * 0.21875)}"` : ""} fill="url(#t)"/>`;
+  const name = PRODUCTS[id].name;
+  if (layer === "bg") return svg(S, S, name, tileRect, defs);
+  if (layer === "mono") return svg(S, S, name,
+    `<rect width="${S}" height="${S}" fill="#FFFFFF" mask="url(#m)"/>`,
+    `<mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="${S}" height="${S}">`
+      + place(PRODUCT_GLYPHS[id]("#FFFFFF", "#FFFFFF", "#000000")) + `</mask>`);
+  const glyphs = place(PRODUCT_GLYPHS[id]("#FFFFFF", C.brand["slate-900"], "url(#h)"));
+  return svg(S, S, name, (layer === "fg" ? "" : tileRect) + glyphs, defs);
 }
 
 // ------------------------------------------------------------------ SVG sources
@@ -260,6 +269,8 @@ const SOURCES = {
   ...Object.fromEntries(Object.keys(PRODUCTS).flatMap((id) => [
     [`products/${id}/icon.svg`, () => productIcon(id)],
     [`products/${id}/app-icon.svg`, () => productIcon(id, { rounded: false })],
+    ...["fg", "bg", "mono"].map((l) => [`products/${id}/app-icon-${{ fg: "foreground", bg: "background", mono: "monochrome" }[l]}.svg`,
+      () => productIcon(id, { layer: l })]),
   ])),
 };
 
@@ -337,6 +348,7 @@ async function rasters(src) {
     const icon = src[`products/${id}/icon.svg`], dir = `products/${id}`;
     for (const s of PRODUCT_SIZES) await add(`${dir}/icon-${s}.png`, icon, s);
     await add(`${dir}/app-icon-1024.png`, src[`${dir}/app-icon.svg`], 1024, 1024, { flatten: LINES[PRODUCTS[id].line][1] });
+    for (const l of ["foreground", "background", "monochrome"]) await add(`${dir}/app-icon-${l}-1024.png`, src[`${dir}/app-icon-${l}.svg`], 1024);
     out[`${dir}/icon.ico`] = ico(await Promise.all([16, 24, 32, 48, 64, 256].map(async (s) => ({ size: s, data: await png(icon, s) }))));
     out[`${dir}/icon.icns`] = icns(await Promise.all(icnsTypes.map(async ([t, s]) => [t, await png(icon, s)])));
   }
@@ -379,7 +391,8 @@ const RASTERS = ["favicon/favicon.ico", "favicon/apple-touch-icon.png", "favicon
   "tauri/128x128.png", "tauri/128x128@2x.png", "tauri/icon.png", "tauri/icon.ico", "tauri/icon.icns",
   "social/og-image.png", "social/org-avatar.png", "banner/readme-banner-light.png", "banner/readme-banner-dark.png",
   ...Object.keys(PRODUCTS).flatMap((id) => [...PRODUCT_SIZES.map((s) => `products/${id}/icon-${s}.png`),
-    `products/${id}/app-icon-1024.png`, `products/${id}/icon.ico`, `products/${id}/icon.icns`])];
+    `products/${id}/app-icon-1024.png`, ...["foreground", "background", "monochrome"].map((l) => `products/${id}/app-icon-${l}-1024.png`),
+    `products/${id}/icon.ico`, `products/${id}/icon.icns`])];
 
 if (args.check) {
   let stale = 0;
