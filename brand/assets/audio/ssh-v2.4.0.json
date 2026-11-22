@@ -1,0 +1,53 @@
+{
+  "product": "ssh",
+  "key": "E lydian",
+  "tier": "showcase",
+  "bpm": 126,
+  "growth_ratio": 0.93,
+  "arp_hits": 10,
+  "ornaments": 0,
+  "kick_hits": 4,
+  "hat_hits": 4,
+  "bass_hits": 4,
+  "development": "retrograde",
+  "progression": [
+    3,
+    4,
+    2,
+    5
+  ],
+  "voicing": [
+    2,
+    4,
+    6,
+    8
+  ],
+  "arp_rotation": 2,
+  "hat_rotation": 3,
+  "arp_order": [
+    8,
+    4,
+    6,
+    0
+  ],
+  "major": [
+    2
+  ],
+  "bars": 34,
+  "stats": {
+    "from": "v2.3.2",
+    "to": "v2.4.0",
+    "commit": "269237cb3e7509dc4458439cc4cf0786a51aea55",
+    "commits": 8,
+    "insertions": 7173,
+    "deletions": 539,
+    "days": 1,
+    "types": {},
+    "lang": {
+      "backend": 0.524,
+      "frontend": 0.357,
+      "config": 0.063,
+      "other": 0.055
+    }
+  }
+}

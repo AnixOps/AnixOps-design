@@ -18,12 +18,13 @@ rules.
 |---|---|
 | [`brand/brand.md`](brand/brand.md) | The brand spec: mark, construction, versions, palette, typography, do and don't, decisions |
 | [`brand/assets/`](brand/assets/) | Mark (slate tile with the gradient orbit A, mono white and black, `currentColor` glyph), small-size favicon, outlined wordmarks, app icon sources, one icon per product (`products/`), and the raster sets: favicon, PWA, iOS/Android, Tauri, OG image, README banners, ASCII mark |
+| [`brand/assets/audio/`](brand/assets/audio/) | One generated theme per product major release (MP3, MIDI, parameters); see brand.md 2.7 |
 | [`tokens/tokens.json`](tokens/tokens.json) | Source of truth in [W3C Design Tokens](https://design-tokens.github.io/community-group/format/) format: colour (light and dark), terminal palette, type scale, spacing, size, radius, shadow, motion, z-index, breakpoints |
 | [`tokens/`](tokens/) | Generated per platform: `css/`, `tailwind/` (v3 preset, v4 theme), `element-plus/`, `flutter/`, `go/anixops/` (Go module), `rust/`. Do not edit by hand |
 | [`fonts/inter/`](fonts/inter/) | Self-hosted Inter (variable, Latin subset) with `@font-face` CSS; SIL OFL 1.1 |
 | [`guidelines/`](guidelines/) | Principles, colour, typography, layout, density, actions and hierarchy, motion, keyboard, iconography, voice and tone, neutral terminology, accessibility, naming, terminal, platforms, adoption |
 | [`legal/`](legal/) | The baseline user agreement, acceptable use policy and disclaimer (Simplified Chinese) that every product's `TERMS.md` follows |
-| [`scripts/`](scripts/) | `build-tokens.py` (tokens → every platform), `contrast.py` (WCAG table), `build-assets.mjs` (SVG and raster assets) |
+| [`scripts/`](scripts/) | `build-tokens.py` (tokens → every platform), `contrast.py` (WCAG table), `build-assets.mjs` (SVG and raster assets), `theme/` (version themes) |
 
 ## Using it in a product
 
