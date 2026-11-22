@@ -1,0 +1,35 @@
+{
+  "product": "agent",
+  "key": "C# dorian",
+  "tier": "server",
+  "bpm": 86,
+  "growth_ratio": 0.23,
+  "arp_hits": 5,
+  "ornaments": 2,
+  "kick_hits": 4,
+  "hat_hits": 9,
+  "bass_hits": 3,
+  "A2": "inversion",
+  "bars": 10,
+  "stats": {
+    "from": "v4.2.0",
+    "to": "v5.0.0",
+    "commits": 21,
+    "insertions": 23810,
+    "deletions": 79892,
+    "days": 24,
+    "types": {
+      "fix": 4,
+      "chore": 9,
+      "feat": 5,
+      "refactor": 2,
+      "ci": 1
+    },
+    "lang": {
+      "backend": 0.535,
+      "frontend": 0.0,
+      "config": 0.033,
+      "other": 0.431
+    }
+  }
+}

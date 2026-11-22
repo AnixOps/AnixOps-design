@@ -1,0 +1,47 @@
+{
+  "product": "net",
+  "key": "B lydian",
+  "tier": "client",
+  "bpm": 104,
+  "growth_ratio": 1.0,
+  "arp_hits": 7,
+  "ornaments": 1,
+  "kick_hits": 3,
+  "hat_hits": 7,
+  "bass_hits": 4,
+  "A2": "retrograde",
+  "bars": 11,
+  "stats": {
+    "from": "73c9ff317debab23e8dfc6cf71b6c68887500617",
+    "to": "v0.3.0-beta.10",
+    "commits": 446,
+    "insertions": 175588,
+    "deletions": 7,
+    "days": 137,
+    "types": {
+      "i": 53,
+      "mac": 18,
+      "release": 4,
+      "windows": 10,
+      "feat": 55,
+      "client": 9,
+      "anixops": 2,
+      "docs": 27,
+      "fix": 60,
+      "ci": 13,
+      "kernel": 2,
+      "chore": 6,
+      "perf": 2,
+      "engine": 1,
+      "ios": 2,
+      "build": 1,
+      "refactor": 1
+    },
+    "lang": {
+      "backend": 0.243,
+      "frontend": 0.079,
+      "config": 0.079,
+      "other": 0.598
+    }
+  }
+}

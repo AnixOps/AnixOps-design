@@ -1,0 +1,44 @@
+{
+  "product": "control",
+  "key": "C# dorian",
+  "tier": "server",
+  "bpm": 86,
+  "growth_ratio": 0.292,
+  "arp_hits": 12,
+  "ornaments": 4,
+  "kick_hits": 4,
+  "hat_hits": 7,
+  "bass_hits": 5,
+  "A2": "inversion",
+  "bars": 11,
+  "stats": {
+    "from": "v4.2.1",
+    "to": "v5.0.0",
+    "commits": 202,
+    "insertions": 137014,
+    "deletions": 331853,
+    "days": 21,
+    "types": {
+      "chore": 25,
+      "refactor": 11,
+      "release": 18,
+      "feat": 81,
+      "fix": 27,
+      "agentinstall": 2,
+      "ci": 7,
+      "gofmt": 1,
+      "sdk": 1,
+      "kernelforward": 1,
+      "docs": 10,
+      "test": 4,
+      "jms": 1,
+      "perf": 1
+    },
+    "lang": {
+      "backend": 0.593,
+      "frontend": 0.197,
+      "config": 0.15,
+      "other": 0.06
+    }
+  }
+}

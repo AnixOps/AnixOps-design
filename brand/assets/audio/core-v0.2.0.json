@@ -1,0 +1,46 @@
+{
+  "product": "core",
+  "key": "E lydian",
+  "tier": "server",
+  "bpm": 86,
+  "growth_ratio": 0.949,
+  "arp_hits": 10,
+  "ornaments": 2,
+  "kick_hits": 5,
+  "hat_hits": 9,
+  "bass_hits": 4,
+  "A2": "inversion",
+  "bars": 10,
+  "stats": {
+    "from": "v0.1.0",
+    "to": "v0.2.0",
+    "commits": 781,
+    "insertions": 140644,
+    "deletions": 7603,
+    "days": 108,
+    "types": {
+      "engine": 3,
+      "i": 8,
+      "docs": 84,
+      "mac": 1,
+      "script": 1,
+      "style": 82,
+      "chore": 6,
+      "feat": 163,
+      "ios": 2,
+      "ci": 28,
+      "test": 74,
+      "fix": 176,
+      "release": 3,
+      "build": 1,
+      "refactor": 2,
+      "merge": 2
+    },
+    "lang": {
+      "backend": 0.732,
+      "frontend": 0.016,
+      "config": 0.061,
+      "other": 0.191
+    }
+  }
+}

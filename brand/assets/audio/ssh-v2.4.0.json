@@ -1,0 +1,29 @@
+{
+  "product": "ssh",
+  "key": "E lydian",
+  "tier": "showcase",
+  "bpm": 126,
+  "growth_ratio": 0.93,
+  "arp_hits": 10,
+  "ornaments": 0,
+  "kick_hits": 4,
+  "hat_hits": 4,
+  "bass_hits": 4,
+  "A2": "retrograde",
+  "bars": 10,
+  "stats": {
+    "from": "v2.3.2",
+    "to": "v2.4.0",
+    "commits": 8,
+    "insertions": 7173,
+    "deletions": 539,
+    "days": 1,
+    "types": {},
+    "lang": {
+      "backend": 0.524,
+      "frontend": 0.357,
+      "config": 0.063,
+      "other": 0.055
+    }
+  }
+}
