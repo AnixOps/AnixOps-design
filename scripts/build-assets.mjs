@@ -190,6 +190,61 @@ function orgAvatar() {
     + `<circle cx="12" cy="17.5" r="2.7" fill="${C.dark["label-1"]}"/></g>`, gradientDef());
 }
 
+// ------------------------------------------------------------------ product icons
+// One icon per product (brand.md 2.6). The symbol names the product; the tile colour names
+// the product line, so colours stay few as products are added. Glyphs sit on the same
+// 24-unit grid as the marks, white, with one slate accent (the dot of the organisation mark).
+// glyph(paint, accent, hole): hole is the tile colour, used to cut the accent free.
+const PRODUCT_GLYPHS = {
+  control: (p, a, h) => `<g stroke="${p}" stroke-width="3" stroke-linecap="round" fill="none"><path d="M4.5 6.5h15M4.5 12h15M4.5 17.5h15"/></g>`
+    + `<circle cx="15" cy="6.5" r="3" fill="${p}"/><circle cx="8.5" cy="12" r="3.1" fill="${a}" stroke="${h}" stroke-width="1.3"/>`
+    + `<circle cx="13" cy="17.5" r="3" fill="${p}"/>`,
+  core: (p, a) => `<rect x="6" y="6" width="12" height="12" rx="3" fill="none" stroke="${p}" stroke-width="3.2"/>`
+    + `<path d="M12 1.8v2.6M12 19.6v2.6M1.8 12h2.6M19.6 12h2.6" stroke="${p}" stroke-width="2.6" stroke-linecap="round"/>`
+    + `<circle cx="12" cy="12" r="2.6" fill="${a}"/>`,
+  agent: (p, a, h) => `<rect x="3.5" y="4.5" width="17" height="6.5" rx="2.2" fill="${p}"/><rect x="3.5" y="13" width="17" height="6.5" rx="2.2" fill="${p}"/>`
+    + `<circle cx="16.4" cy="7.75" r="1.7" fill="${a}"/><circle cx="16.4" cy="16.25" r="1.7" fill="${a}"/>`
+    + `<path d="M7 7.75h4M7 16.25h4" stroke="${h}" stroke-width="1.6" stroke-linecap="round"/>`,
+  net: (p, a, h) => `<path d="M5.5 18.5C5.5 11 18.5 13 18.5 5.5" fill="none" stroke="${p}" stroke-width="3.4" stroke-linecap="round"/>`
+    + `<circle cx="5.5" cy="18.5" r="3" fill="${p}"/><circle cx="18.5" cy="5.5" r="3.2" fill="${a}" stroke="${h}" stroke-width="1.2"/>`,
+  ssh: (p, a) => `<path d="M5 6.5 10.5 12 5 17.5" fill="none" stroke="${p}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>`
+    + `<rect x="12.5" y="15" width="7" height="4" rx="2" fill="${a}"/>`,
+};
+const PRODUCTS = {
+  control: { name: "AnixOps Control", line: "network" },
+  core: { name: "AnixOps Core", line: "network" },
+  agent: { name: "AnixOps Agent", line: "network" },
+  net: { name: "AnixOps Net", line: "network" },
+  ssh: { name: "AnixOps SSH", line: "tools" },
+};
+const LINES = {
+  network: [C.brand["gradient-start"], C.brand["gradient-end"]],
+  tools: [C.brand["line-tools-start"], C.brand["line-tools-end"]],
+};
+
+/** 1024 px product icon. rounded: tile radius as the mark; otherwise full bleed for platforms
+ *  that mask the icon themselves. Glyph box 70 % of the side. The tile gradient is repeated in
+ *  the glyph's own space so cut-outs match the tile exactly.
+ *  layer (Android adaptive icons, glyph box 50 % so it stays in the safe zone):
+ *  "fg" glyph only, "bg" tile only, "mono" one-colour glyph with the cut-outs transparent. */
+function productIcon(id, { rounded = true, layer = "" } = {}) {
+  const S = 1024, box = S * (layer ? 0.5 : 0.7), o = (S - box) / 2, k = box / 24;
+  const [a, b] = LINES[PRODUCTS[id].line];
+  const stops = `<stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/>`;
+  const defs = `<linearGradient id="t" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${S}" y2="${S}">${stops}</linearGradient>`
+    + `<linearGradient id="h" gradientUnits="userSpaceOnUse" x1="${n(-o / k)}" y1="${n(-o / k)}" x2="${n((S - o) / k)}" y2="${n((S - o) / k)}">${stops}</linearGradient>`;
+  const place = (body) => `<g transform="translate(${n(o)} ${n(o)}) scale(${n(k)})">${body}</g>`;
+  const tileRect = `<rect width="${S}" height="${S}"${rounded && !layer ? ` rx="${n(S * 0.21875)}"` : ""} fill="url(#t)"/>`;
+  const name = PRODUCTS[id].name;
+  if (layer === "bg") return svg(S, S, name, tileRect, defs);
+  if (layer === "mono") return svg(S, S, name,
+    `<rect width="${S}" height="${S}" fill="#FFFFFF" mask="url(#m)"/>`,
+    `<mask id="m" maskUnits="userSpaceOnUse" x="0" y="0" width="${S}" height="${S}">`
+      + place(PRODUCT_GLYPHS[id]("#FFFFFF", "#FFFFFF", "#000000")) + `</mask>`);
+  const glyphs = place(PRODUCT_GLYPHS[id]("#FFFFFF", C.brand["slate-900"], "url(#h)"));
+  return svg(S, S, name, (layer === "fg" ? "" : tileRect) + glyphs, defs);
+}
+
 // ------------------------------------------------------------------ SVG sources
 const SOURCES = {
   "mark.svg": () => svg(64, 64, "AnixOps", tile(0, 0, 64), gradientDef()),
@@ -211,9 +266,16 @@ const SOURCES = {
   "banner/readme-banner-dark.svg": () => banner("", "dark"),
   "social/og-image.svg": () => ogImage(""),
   "social/org-avatar.svg": () => orgAvatar(),
+  ...Object.fromEntries(Object.keys(PRODUCTS).flatMap((id) => [
+    [`products/${id}/icon.svg`, () => productIcon(id)],
+    [`products/${id}/app-icon.svg`, () => productIcon(id, { rounded: false })],
+    ...["fg", "bg", "mono"].map((l) => [`products/${id}/app-icon-${{ fg: "foreground", bg: "background", mono: "monochrome" }[l]}.svg`,
+      () => productIcon(id, { layer: l })]),
+  ])),
 };
 
 // ------------------------------------------------------------------ rasters
+const PRODUCT_SIZES = [16, 32, 48, 64, 128, 180, 192, 256, 512, 1024];
 async function png(svgText, w, h = w, { flatten } = {}) {
   const vb = svgText.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/);
   const density = Math.min(2400, Math.max(72, (72 * w) / parseFloat(vb[1])));
@@ -279,6 +341,17 @@ async function rasters(src) {
   await add("social/org-avatar.png", src["social/org-avatar.svg"], 1024, 1024, { flatten: C.brand["slate-900"] });
   await add("banner/readme-banner-light.png", src["banner/readme-banner-light.svg"], 2560, 640);
   await add("banner/readme-banner-dark.png", src["banner/readme-banner-dark.svg"], 2560, 640);
+
+  // Product icons: web sizes from the rounded tile, store and Tauri sets from it as well
+  // (macOS and Windows show the icon as drawn); app-icon-1024 is full bleed for iOS/Android.
+  for (const id of Object.keys(PRODUCTS)) {
+    const icon = src[`products/${id}/icon.svg`], dir = `products/${id}`;
+    for (const s of PRODUCT_SIZES) await add(`${dir}/icon-${s}.png`, icon, s);
+    await add(`${dir}/app-icon-1024.png`, src[`${dir}/app-icon.svg`], 1024, 1024, { flatten: LINES[PRODUCTS[id].line][1] });
+    for (const l of ["foreground", "background", "monochrome"]) await add(`${dir}/app-icon-${l}-1024.png`, src[`${dir}/app-icon-${l}.svg`], 1024);
+    out[`${dir}/icon.ico`] = ico(await Promise.all([16, 24, 32, 48, 64, 256].map(async (s) => ({ size: s, data: await png(icon, s) }))));
+    out[`${dir}/icon.icns`] = icns(await Promise.all(icnsTypes.map(async ([t, s]) => [t, await png(icon, s)])));
+  }
   return out;
 }
 
@@ -316,7 +389,10 @@ const RASTERS = ["favicon/favicon.ico", "favicon/apple-touch-icon.png", "favicon
   "favicon/icon-maskable-512.png", "app-icon/app-icon-1024.png", "app-icon/app-icon-foreground-1024.png",
   "app-icon/app-icon-background-1024.png", "app-icon/app-icon-monochrome-1024.png", "tauri/32x32.png",
   "tauri/128x128.png", "tauri/128x128@2x.png", "tauri/icon.png", "tauri/icon.ico", "tauri/icon.icns",
-  "social/og-image.png", "social/org-avatar.png", "banner/readme-banner-light.png", "banner/readme-banner-dark.png"];
+  "social/og-image.png", "social/org-avatar.png", "banner/readme-banner-light.png", "banner/readme-banner-dark.png",
+  ...Object.keys(PRODUCTS).flatMap((id) => [...PRODUCT_SIZES.map((s) => `products/${id}/icon-${s}.png`),
+    `products/${id}/app-icon-1024.png`, ...["foreground", "background", "monochrome"].map((l) => `products/${id}/app-icon-${l}-1024.png`),
+    `products/${id}/icon.ico`, `products/${id}/icon.icns`])];
 
 if (args.check) {
   let stale = 0;

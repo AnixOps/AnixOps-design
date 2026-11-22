@@ -280,6 +280,8 @@ abstract final class AnixOpsBrand {
   static const amber = Color(0xFFF59E0B);
   static const slate900 = Color(0xFF0F172A);
   static const slate800 = Color(0xFF1E293B);
+  static const lineToolsStart = Color(0xFF0D9488);
+  static const lineToolsEnd = Color(0xFF16A34A);
   static const gradient = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

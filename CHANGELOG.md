@@ -7,6 +7,12 @@ All notable changes to AnixOps Design. Versions follow
 
 ### Added
 
+- Product icons (`brand/brand.md` 2.6): one icon per product, AnixOps
+  Control, Core, Agent, Net and SSH, under `brand/assets/products/<id>/`
+  (rounded and full-bleed SVG, PNG 16–1024, ICO, ICNS). The symbol names the
+  product, the tile colour names the product line. New tokens
+  `color.brand.line-tools-start` / `line-tools-end` for the tools line.
+
 - `guidelines/terminology.md` (`T1`–`T8`): neutral terminology for every
   product (服务商 / provider, 网络干扰, 服务可用性 and the terms they replace),
   with the machine-readable list `guidelines/neutral-terms.json` and the

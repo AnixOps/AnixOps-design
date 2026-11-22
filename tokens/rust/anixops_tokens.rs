@@ -131,6 +131,8 @@ pub mod brand {
     pub const AMBER: Rgba = Rgba::new(0xF5, 0x9E, 0x0B, 0xFF);
     pub const SLATE_900: Rgba = Rgba::new(0x0F, 0x17, 0x2A, 0xFF);
     pub const SLATE_800: Rgba = Rgba::new(0x1E, 0x29, 0x3B, 0xFF);
+    pub const LINE_TOOLS_START: Rgba = Rgba::new(0x0D, 0x94, 0x88, 0xFF);
+    pub const LINE_TOOLS_END: Rgba = Rgba::new(0x16, 0xA3, 0x4A, 0xFF);
 }
 
 /// Terminal palette. Honour NO_COLOR and never rely on colour alone.
