@@ -5,6 +5,19 @@ All notable changes to AnixOps Design. Versions follow
 
 ## Unreleased
 
+### Changed
+
+- Text colours now hold 4.5:1 on the translucent fills they sit on, not only
+  on the three backgrounds (`guidelines/color.md` rule 7): light `label-2`
+  `#6E6E73` → `#656569`, `accent`/`info` `#4F5BE8` → `#4753E8`, `success`
+  `#1A7F37` → `#1A7537`, `warning` `#B25000` → `#A24F00`, `danger` `#D70015`
+  → `#CF0015`; dark `accent`/`info` `#818CF8` → `#8994F8`, `danger` `#FF453A`
+  → `#FF6D62`. `accent-fill`, `danger-fill`, the soft fills, chart colours
+  and the terminal palette are unchanged. Found by the AnixOps Net desktop
+  axe check: secondary text in the sidebar, success pills and a danger
+  status in a selected row were 3.7–4.4:1. `scripts/contrast.py` now
+  composites every fill over every background and checks those pairs too.
+
 ### Added
 
 - Version themes (`brand/brand.md` 2.7): a generated piece of music per
