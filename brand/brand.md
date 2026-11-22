@@ -229,9 +229,9 @@ stays solid at small sizes; `scripts/contrast.py --check` enforces this.
 
 | Token | Light | Dark | Notes |
 |---|---|---|---|
-| `--accent` | `#4F5BE8` | `#818CF8` | Links, selection, focus ring, icons. 5.26:1 on white; 7.04:1 on black, 5.70:1 on `#1C1C1E` |
+| `--accent` | `#4753E8` | `#8994F8` | Links, selection, focus ring, icons. 5.72:1 on white; 7.66:1 on black, 6.20:1 on `#1C1C1E`; at least 4.5:1 on every fill (color.md rule 7) |
 | `--accent-hover` | `#4350DD` | `#949EFA` | |
-| `--accent-fill` | `#4F5BE8` | `#5B63E6` | Primary button background. White text 5.26:1 / 4.80:1. Dark needs a deeper fill because white on `#818CF8` is only 2.98:1 |
+| `--accent-fill` | `#4F5BE8` | `#5B63E6` | Primary button background. White text 5.26:1 / 4.80:1. Dark needs a deeper fill because white on `#8994F8` is only 2.74:1 |
 | `--accent-fill-hover` | `#4350DD` | `#5058DC` | |
 | `--accent-soft` | `rgba(79,91,232,.10)` | `rgba(129,140,248,.18)` | Selected rows, chips |
 
@@ -249,7 +249,7 @@ earlier primaries, including anix-control's `#0064FA`.
 | `--bg-elevated` | `#FFFFFF` | `#1C1C1E` |
 | `--bg-grouped` | `#F5F5F7` | `#111113` |
 | `--label-1` | `#1D1D1F` | `#F5F5F7` |
-| `--label-2` | `#6E6E73` | `#A1A1A6` |
+| `--label-2` | `#656569` | `#A1A1A6` |
 | `--label-3` | `#86868B` | `#8E8E93` |
 | `--separator` | `rgba(60,60,67,.12)` | `rgba(84,84,88,.48)` |
 
@@ -261,9 +261,9 @@ meaning).
 
 | Token | Light | Dark |
 |---|---|---|
-| `--success` | `#1A7F37` | `#30D158` |
-| `--warning` | `#B25000` | `#FF9F0A` |
-| `--danger` | `#D70015` | `#FF453A` |
+| `--success` | `#1A7537` | `#30D158` |
+| `--warning` | `#A24F00` | `#FF9F0A` |
+| `--danger` | `#CF0015` | `#FF6D62` |
 | `--danger-fill` | `#D70015` | `#E0242F` |
 | Purple (supporting) | `#8B5CF6` | `#8B5CF6` |
 | Amber (supporting) | `#F59E0B` | `#F59E0B` |

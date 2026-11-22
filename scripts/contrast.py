@@ -28,7 +28,21 @@ def ratio(fg, bg):
     return (max(a, b) + 0.05) / (min(a, b) + 0.05)
 
 
+def over(top, base):
+    """A token that may be translucent (rgba) composited over an opaque hex colour."""
+    if top.startswith("#"):
+        return top
+    parts = [float(v) for v in top[top.index("(") + 1:top.index(")")].split(",")]
+    b = [int(base[i:i + 2], 16) for i in (1, 3, 5)]
+    a = parts[3]
+    return "#" + "".join(f"{round(parts[i] * a + b[i] * (1 - a)):02X}" for i in range(3))
+
+
 def tok(theme, name):
+    if "/" in name:
+        # "fill-1/bg-grouped": a translucent fill as it is drawn on a background.
+        top, base = name.split("/")
+        return over(tok(theme, top), tok(theme, base))
     if name.startswith("#"):
         return name
     if name.startswith("brand."):
@@ -45,6 +59,16 @@ for theme in ("light", "dark"):
                        ("success", 4.5), ("warning", 4.5), ("danger", 4.5)]:
         for bg in TEXT_BGS:
             PAIRS.append((theme, fg, bg, target))
+    # Text also sits on the translucent fills: a selected row (accent-soft), a badge or status pill
+    # (its own -soft fill), a control or the sidebar (fill-1, fill-2). Every text colour has to hold
+    # on each of them, over each background they are drawn on.
+    for fg in ("label-1", "label-2", "accent", "success", "warning", "danger"):
+        fills = ["fill-1", "fill-2", "accent-soft"]
+        if fg in ("success", "warning", "danger"):
+            fills.append(f"{fg}-soft")
+        for fill in fills:
+            for bg in TEXT_BGS:
+                PAIRS.append((theme, fg, f"{fill}/{bg}", 4.5))
     PAIRS += [
         (theme, "on-accent", "accent-fill", 4.5),
         (theme, "on-accent", "accent-fill-hover", 4.5),
