@@ -127,6 +127,21 @@ for absent values (N13), one "more" menu per row (S3).
   one control; a setting that needs more opens a detail page or sheet.
 - **N24** A comfortable page shows at most one compact table, and only
   a short one (ten rows or fewer, with "全部 ›" per A4).
+- **N25** A settings page's first screen holds the settings most people
+  change: at most 8 sections and 24 rows, and no taller than two
+  viewports at the reference size (phone 393 × 852, desktop window
+  1100 × 760). Advanced and rarely used settings go to a "高级 / Advanced"
+  detail page, privacy and diagnostics to "隐私与诊断 / Privacy &
+  Diagnostics" (H5, N23). A footer on the first screen is one sentence;
+  longer explanations live on the detail page.
+- **N26** A list of things the user adds (plugins, scripts, rules, Wi-Fi
+  rules, hosts) on a comfortable page shows at most five rows. Beyond
+  five it folds in place behind "显示全部 N 个 / Show all N" (which turns
+  into "收起 / Show less"), or opens a detail page with "全部 ›" (A4).
+  The add action stays visible below the folded list.
+- **N27** A master switch that turns a feature on or off sits in its own
+  section, above the content it governs, never as one row among the
+  items it controls (H7).
 
 ## 4. Review checklist
 
@@ -137,3 +152,12 @@ for absent values (N13), one "more" menu per row (S3).
 5. Are truncated values recoverable by tooltip and copy? (N12)
 6. Are absent, loading and failed values distinct? (N13, N14)
 7. Are column choices and sort remembered? (N16, N17)
+8. Does the settings first screen fit the budget, with advanced and
+   diagnostic items on their detail pages? (N25)
+9. Does every user-added list fold after five rows? (N26)
+10. Does each master switch have its own section? (N27)
+
+Products check N25–N27 in CI, not only in review: a static count of the
+settings first screen's sections and rows, and a runtime measure of the
+page height and of list lengths in the screenshot jobs (anixops-net
+`docs/ui-ux.md`, "自动检查").

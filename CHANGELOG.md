@@ -5,6 +5,15 @@ All notable changes to AnixOps Design. Versions follow
 
 ## Unreleased
 
+### Added
+
+- `guidelines/density.md` N25–N27: a budget for the settings first screen
+  (8 sections, 24 rows, two viewports; advanced and diagnostic items on
+  detail pages), user-added lists fold after five rows, and a master switch
+  gets its own section. Products check them in CI. Prompted by the AnixOps
+  Net settings page growing past what most people read, and the HTTPS
+  decryption switch sitting among the plugin rows.
+
 ### Changed
 
 - Text colours now hold 4.5:1 on the translucent fills they sit on, not only
