@@ -8,7 +8,7 @@ All notable changes to AnixOps Design. Versions follow
 ### Added
 
 - `guidelines/density.md` N25–N27: a budget for the settings first screen
-  (8 sections, 24 rows, two viewports; advanced and diagnostic items on
+  (8 sections, 16 rows, two viewports; advanced and diagnostic items on
   detail pages), user-added lists fold after five rows, and a master switch
   gets its own section. Products check them in CI. Prompted by the AnixOps
   Net settings page growing past what most people read, and the HTTPS

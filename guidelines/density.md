@@ -128,7 +128,7 @@ for absent values (N13), one "more" menu per row (S3).
 - **N24** A comfortable page shows at most one compact table, and only
   a short one (ten rows or fewer, with "全部 ›" per A4).
 - **N25** A settings page's first screen holds the settings most people
-  change: at most 8 sections and 24 rows, and no taller than two
+  change: at most 8 sections and 16 rows, and no taller than two
   viewports at the reference size (phone 393 × 852, desktop window
   1100 × 760). Advanced and rarely used settings go to a "高级 / Advanced"
   detail page, privacy and diagnostics to "隐私与诊断 / Privacy &
