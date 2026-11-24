@@ -16,6 +16,10 @@ All notable changes to AnixOps Design. Versions follow
 
 ### Changed
 
+- AnixOps Net product icon: the single arc between two nodes read as a
+  stick at small sizes, so the symbol is now a route that forks in two, the
+  chosen branch ending at the slate dot (traffic split by rules). Same tile,
+  colours and stroke range; every `assets/products/net/` file regenerated.
 - Text colours now hold 4.5:1 on the translucent fills they sit on, not only
   on the three backgrounds (`guidelines/color.md` rule 7): light `label-2`
   `#6E6E73` → `#656569`, `accent`/`info` `#4F5BE8` → `#4753E8`, `success`

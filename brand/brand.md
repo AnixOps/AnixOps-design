@@ -141,7 +141,7 @@ new product line gets a new colour.
 | AnixOps Control | Three sliders, the middle knob is the dot | Network | Brand gradient `#0EA5E9 → #6366F1` |
 | AnixOps Core | A chip with the dot at its centre | Network | Brand gradient |
 | AnixOps Agent | Two server units with status dots | Network | Brand gradient |
-| AnixOps Net | A route between two nodes, ending at the dot | Network | Brand gradient |
+| AnixOps Net | A route that forks in two; the chosen branch ends at the dot | Network | Brand gradient |
 | AnixOps SSH | A prompt `>` with a block cursor | Tools | `#0D9488 → #16A34A` (`line-tools-*`) |
 
 Construction: 1024 × 1024 canvas, tile radius 21.875 % (as the mark), 135°
