@@ -205,8 +205,8 @@ const PRODUCT_GLYPHS = {
   agent: (p, a, h) => `<rect x="3.5" y="4.5" width="17" height="6.5" rx="2.2" fill="${p}"/><rect x="3.5" y="13" width="17" height="6.5" rx="2.2" fill="${p}"/>`
     + `<circle cx="16.4" cy="7.75" r="1.7" fill="${a}"/><circle cx="16.4" cy="16.25" r="1.7" fill="${a}"/>`
     + `<path d="M7 7.75h4M7 16.25h4" stroke="${h}" stroke-width="1.6" stroke-linecap="round"/>`,
-  net: (p, a, h) => `<path d="M5.5 18.5C5.5 11 18.5 13 18.5 5.5" fill="none" stroke="${p}" stroke-width="3.4" stroke-linecap="round"/>`
-    + `<circle cx="5.5" cy="18.5" r="3" fill="${p}"/><circle cx="18.5" cy="5.5" r="3.2" fill="${a}" stroke="${h}" stroke-width="1.2"/>`,
+  net: (p, a, h) => `<path d="M12 20.5V14.2C12 11.5 10.6 10 6 6.2M12 14.2C12 11.5 13.4 10 18 6.2" fill="none" stroke="${p}" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>`
+    + `<circle cx="12" cy="19.6" r="2.9" fill="${p}"/><circle cx="5.6" cy="5.8" r="2.7" fill="${p}"/><circle cx="18.4" cy="5.8" r="3.1" fill="${a}" stroke="${h}" stroke-width="1.2"/>`,
   ssh: (p, a) => `<path d="M5 6.5 10.5 12 5 17.5" fill="none" stroke="${p}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>`
     + `<rect x="12.5" y="15" width="7" height="4" rx="2" fill="${a}"/>`,
 };
