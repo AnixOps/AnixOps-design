@@ -7,6 +7,11 @@ All notable changes to AnixOps Design. Versions follow
 
 ### Added
 
+- `guidelines/voice-and-tone.md` W1–W7, formal register: no second person,
+  no colloquial words or contractions, no exclamation marks, hints say what
+  and not why or how, no explanatory connectives, at most two sentences per
+  string. `guidelines/formal-copy.json` lists the forbidden words for
+  products to check their string tables in CI.
 - `guidelines/density.md` N25–N27: a budget for the settings first screen
   (8 sections, 16 rows, two viewports; advanced and diagnostic items on
   detail pages), user-added lists fold after five rows, and a master switch
