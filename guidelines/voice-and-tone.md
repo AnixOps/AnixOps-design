@@ -103,3 +103,19 @@ Examples:
 | 部署 | Deployment | |
 | 审计日志 | Audit log | |
 | 插件中心 | Plugin Center | |
+| 组网 | Mesh | The private-network feature and its page; never a third-party product name |
+| 网络 | Network | One mesh network the device joins: 「加入」/ "Join", 「已加入」/ "Joined" |
+| 成员 | Member | A device in a network; 「本机」/ "This device" for the local one |
+| 地区 | Region | A group of members joined to the others by border members |
+| 边界 | Border | Role: links a region to other regions |
+| 网关 | Gateway | Role: advertises the local network it sits in |
+| 宿主 | Host | Role: joins on behalf of the virtual machines it runs |
+| 接入端 | Client | Role: joins only; does not relay or advertise (phones) |
+| 通告子网 | Advertised subnet | 「通告」/ "Advertise" is the verb |
+| 直连 | Peer-to-peer | Between members. The routing policy 「直连」 stays "Direct" |
+| 中转 | Relayed | With the hop count: 「中转 2 跳」/ "Relayed · 2 hops" |
+| 跨区 | Cross-region | 「跨区 3 跳」/ "Cross-region · 3 hops" |
+| 途经点 | Waypoint | A member a custom path must pass through |
+| 已回落 | Fell back | A custom path that is using the default path; the message names the unreachable member |
+| 已自动切换 | Switched automatically | A cross-region link that is taking a detour |
+| 未启用前向保密 | No forward secrecy | Label on a network using the standard mode |
