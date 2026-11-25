@@ -143,7 +143,51 @@ for absent values (N13), one "more" menu per row (S3).
   section, above the content it governs, never as one row among the
   items it controls (H7).
 
-## 4. Review checklist
+## 4. Grouped and nested lists
+
+A list of things that belong to something else (members of a network by
+region, virtual machines on a host, devices behind a gateway, nodes by
+subscription) shows that structure instead of one long flat list. The
+network member list of AnixOps Net is the reference case.
+
+- **N28** A list that can pass about twenty rows is grouped by one
+  dimension at a time. The product names the default dimension and offers
+  at most three others, plus "不分组 / None", in one "分组 / Group by"
+  control at page scope (S2). Groups never nest inside groups.
+- **N29** A group header states the group's name and its count
+  ("欧洲 · 9 台"), is sticky, and folds its rows. A folded header becomes
+  a one-line summary: the count, the worst status inside it (N33) and the
+  one metric that matters for the group. The group the user is in, or
+  the one that needs attention, opens unfolded; the rest open folded.
+  What the user folds or unfolds is remembered per list.
+- **N30** A row may unfold in place to show the things it stands for,
+  one level only (H9). The children are rows in the same columns,
+  indented once, on the `--fill-1` background, without actions of their
+  own beyond the default one (S7). Anything deeper opens the detail page
+  or the inspector. On pointer platforms the disclosure control unfolds
+  and a click on the row selects it; on touch a tap unfolds, and the
+  unfolded part ends with a link to the detail page (A4).
+- **N31** A parent row summarises what it holds while folded: the count
+  with its noun ("5 台虚拟机", "2 个子网") in `--label-2` after the name.
+  Children fold after five behind "显示全部 N 个 / Show all N" (N26).
+- **N32** Search looks inside folded groups and folded rows. A match in
+  a child shows its parent unfolded with the match visible; groups with
+  no match are hidden, and the header count becomes "matches / total"
+  ("3/9"). Filters work the same way. Clearing the search restores the
+  fold state from before it.
+- **N33** A folded group or parent shows the worst status among its
+  rows, as the dot and one word with a count ("1 台不可达"), never a
+  colour alone (H4, N14). A condition that changed without the user
+  acting (a path that fell back, a link that switched over) is a pill on
+  the affected row and one banner for the page (F2), not a pill on every
+  row it touches.
+- **N34** What a row is (its role or kind) is a neutral pill after the
+  name, one per row; how it is reached and how it is doing stay in their
+  own columns (N8). On touch the second line carries, in this order:
+  the identifier, how it is reached, then the count of what it holds
+  (N5).
+
+## 5. Review checklist
 
 1. Is the page's tier the one its type calls for, and only one? (N1, N3)
 2. On touch, are rows still 44 or taller? (N5)
@@ -156,6 +200,12 @@ for absent values (N13), one "more" menu per row (S3).
    diagnostic items on their detail pages? (N25)
 9. Does every user-added list fold after five rows? (N26)
 10. Does each master switch have its own section? (N27)
+11. Is a long list grouped by one dimension, with counts and a folded
+    summary on each header? (N28, N29)
+12. Do rows unfold one level only, with the rest on a detail page? (N30)
+13. Does search reach folded groups and children? (N32)
+14. Does a folded group or parent show the worst status inside it, in
+    words? (N33)
 
 Products check N25–N27 in CI, not only in review: a static count of the
 settings first screen's sections and rows, and a runtime measure of the

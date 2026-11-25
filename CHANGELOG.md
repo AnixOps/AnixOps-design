@@ -7,6 +7,17 @@ All notable changes to AnixOps Design. Versions follow
 
 ### Added
 
+- `guidelines/density.md` section 4, N28–N34, grouped and nested lists:
+  one grouping dimension at a time with a "Group by" control, group
+  headers with a count and a folded one-line summary, rows that unfold one
+  level only, parent rows that state what they hold, search and filters
+  that reach folded rows, the worst status shown on a folded group, and
+  one role pill per row. The review checklist is now section 5. Prompted
+  by the AnixOps Net mesh member list (regions, gateways with subnets,
+  hosts with virtual machines).
+- `guidelines/voice-and-tone.md` glossary: the mesh terms (组网, 成员,
+  地区, 边界, 网关, 宿主, 接入端, 通告子网, 中转, 跨区, 途经点 and the path
+  states).
 - `guidelines/voice-and-tone.md` W1–W7, formal register: no second person,
   no colloquial words or contractions, no exclamation marks, hints say what
   and not why or how, no explanatory connectives, at most two sentences per
