@@ -70,3 +70,7 @@ chart, alerts and activity) · Wizard (steps, form, back/next).
 
 Which actions go in the header, toolbar, bulk bar, rows and footers of these
 templates is set by [`actions.md`](actions.md).
+
+When an admin domain has more than 5 sub-views, use a grouped sidebar or left
+sub-navigation rail rather than stacking or overloading `SegmentedControl` (which
+is bounded to 2–5 mutually exclusive values).

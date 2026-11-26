@@ -40,7 +40,9 @@ check their string tables in CI (the AnixOps Net client: `ui_lint.py` U7, U8).
   changes, in one sentence. It does not explain the reason, the mechanism or
   the steps; that belongs in the documentation. Keep only what the user needs
   to decide: data that leaves the device, a change to the system, an action
-  that cannot be undone.
+  that cannot be undone. Exception: error and permission-recovery notices may
+  include one concise next-step action (e.g. "Check firewall port 443.") without
+  exposing raw internal codes.
 - **W5 No explanatory connectives.** No 「因为」「所以」「因此」「由于」「这样」
   「以便」「从而」「为了」「也就是说」「换句话说」; no "because", "so that",
   "in order to", "that way", "which means", "in other words". If a sentence
