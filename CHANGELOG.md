@@ -7,6 +7,13 @@ All notable changes to AnixOps Design. Versions follow
 
 ### Added
 
+- `legal/terms.zh-CN.md` 2.2.0: section 1 gains 「提供地区」. The AnixOps
+  Net client is not offered in mainland China: no official builds, updates,
+  store listings or promotion there, and the download channels we run do
+  not answer requests from mainland China. The software is not built to
+  evade any country's or region's network rules. A new clause (minor
+  version), so clients do not ask for consent again; every product
+  repository copies the new common terms.
 - `guidelines/density.md` section 4, N28–N34, grouped and nested lists:
   one grouping dimension at a time with a "Group by" control, group
   headers with a count and a folded one-line summary, rows that unfold one
